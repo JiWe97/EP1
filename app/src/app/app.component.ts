@@ -10,6 +10,5 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.component.css'
 })
 export class AppComponent {
-  title:string = 'Eindproef Frontend';
-  creators:string = 'Jill Wets (Scrum master), Shelsy De Ryck & Vicki Ramsdonck'
+  
 }
