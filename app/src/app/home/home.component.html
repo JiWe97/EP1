@@ -1,1 +1,31 @@
-<p>home works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <p>{{ title }}</p>
+      <p>{{ creators }}</p>
+      <div class="search">
+        <h1>What do you want to eat?</h1>
+        <input
+          type="text"
+          class="form-control m-1"
+          [(ngModel)]="mySearch"
+          placeholder="What do you want to eat?"
+        />
+        <button (click)="getData()" class="btn btn-primary m-1">Search</button>
+      </div>
+      <div class="results">
+        <div class="card" style="width: 18rem">
+          <img src="..." class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">
+              Some quick example text to build on the card title and make up the
+              bulk of the card's content.
+            </p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
