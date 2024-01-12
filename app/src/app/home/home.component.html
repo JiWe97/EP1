@@ -11,6 +11,7 @@
       </div>
       <div class="result">
         <h3>Results for {{mySearch}}</h3>
+        <div class="row">
         @for (element of this.search; track element.id) {
           
           <div class="card" style="width: 18rem; margin: 10px;" >
@@ -23,7 +24,7 @@
         } @empty {
           Empty list of users
         }
-
+      </div>
       </div>
     </div>
   </div>

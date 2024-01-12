@@ -39,7 +39,7 @@ export class HomeComponent {
       })
       .catch(err => console.error(err));
   }
-
+/* 
   postData() {
     for (let i = 0; i < 5; i++) {
       const card = document.createElement("div");
@@ -54,14 +54,12 @@ export class HomeComponent {
                   `;
     }
   
-  }
+  } */
 
 
-/* ngOnInit() {
-  for (let i = 0; i < 5; i++)
+ngOnInit() {
   this.getData();
-  this.postData();
-} */
+}
 }
 
 
