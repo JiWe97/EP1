@@ -4,28 +4,53 @@
       <h1>Recepten-app</h1>
      <!--  <p>{{ title }}</p>
       <p>{{ creators }}</p> -->
-      <div class="search">
+      <div class="search"  *ngIf="hideRecipeInformation">
         <h1>What do you want to eat?</h1>
         <input type="text" class="form-control m-1" [(ngModel)]="mySearch" placeholder="What do you want to eat?">
         <button (click)="getData()" class="btn btn-primary m-1">Search</button>
-      </div>
-      <div class="result">
-        <h3>Results for {{mySearch}}</h3>
-        <div class="row">
-        @for (element of this.search; track element.id) {
-          
-          <div class="card" style="width: 18rem; margin: 10px;" >
-            <img src="{{element.image}}" class="card-img-top" alt="{{element.title}}">
-            <div class="card-body">
-              <h5 class="card-title">{{element.title}}</h5>
-              <a href="#" class="btn btn-primary">Let's cook!</a>
+        <button class="btn btn-primary">Filter</button>
+      
+        <div class="searchResults">
+          @if (mySearch) {
+            <h3>Results for {{mySearch}}</h3>
+          } @else {
+            <h3>Suggestions</h3>
+          }
+          <div class="row">
+          @for (element of this.search; track element.id) {
+            
+            <div class="card" style="width: 18rem; margin: 10px;" >
+              <img src="{{element.image}}" class="card-img-top" alt="{{element.title}}">
+              <div class="card-body">
+                <h5 class="card-title">{{element.title}}</h5>
+                <button (click)="getRecipe(element.id)" class="btn btn-primary">Let's cook!</button>
+              </div>
             </div>
-          </div>
-        } @empty {
-          Empty list of users
-        }
+          } @empty {
+            No results found
+          }
+        </div>
+        </div>
       </div>
+     
+     <div class="recipeInformation">
+
+      {{
+        results | json
+      }}
+      @for (part of this.results; track part.id) {
+        <h1>{{part.title}}</h1>
+        <img src="{{part.image}}" alt="{{part.title}}">
+        <p>Ingredients: {{part.extendedIngredients.original.join(', ')}}</p>
+        <p>Diets: {{part.diets}}</p>
+        <p>Ready in {{part.readyInMinutes}} minutes.</p>
+        <p>Serves {{part.servings}} people</p>
+        <p>Instructions: {{part.instructions}}</p>
+      } @empty {
+        <p>Something went wrong, please contact support</p>
+      }
       </div>
+    
     </div>
   </div>
 </div>
