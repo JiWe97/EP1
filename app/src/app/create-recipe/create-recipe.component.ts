@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MyRecipesService } from '../../shared/my-recipes.service';
+// import { MyRecipesService } from '../../shared/my-recipes.service';
 import { FormsModule} from '@angular/forms';
 // import { CommonModule } from '@angular/common';
 // import { Observable } from 'rxjs';
@@ -15,7 +15,7 @@ import { FormsModule} from '@angular/forms';
   ],
   standalone: true,
   providers: [
-    MyRecipesService
+    // MyRecipesService
   ]
 })
 export class CreateRecipeComponent implements OnInit {
@@ -34,13 +34,13 @@ export class CreateRecipeComponent implements OnInit {
     
   // }
 
-  recipesObservable = this.recipeService.getRecipes();
+  // recipesObservable = this.recipeService.getRecipes();
 
   myRecipes: any[] = [];
   dbURL: string = '../../db/db.json';
   pageURL: string = 'http://localhost:3000/recipes';
   constructor(
-    private recipeService: MyRecipesService,
+    // private recipeService: MyRecipesService,
     // private fb: FormBuilder
   ) {}
 
