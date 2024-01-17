@@ -1,1 +1,68 @@
-<p>home works!</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <h1>Recepten-app</h1>
+      <div class="search"  *ngIf="hideRecipeInformation">
+        <h1>What do you want to eat?</h1>
+        <input type="text" class="form-control m-1" [(ngModel)]="mySearch" placeholder="What do you want to eat?">
+        <div class="form-floating">
+          <select class="form-select" id="floatingSelect" aria-label="Floating label select example" [(ngModel)]="myDiet">
+            <option value="none">None</option>
+            <option value="vegetarian">Vegetarian</option>
+            <option value="vegan">Vegan</option>
+            <option value="pescetarian">Pescetarian</option>
+            <option value="lowfodmap">Low fodmap</option>
+            <option value="glutenfree">Gluten free</option>
+            <option value="dairyfree">Dairy free</option>
+            <option value="paleo">Paleo</option>
+            <option value="ketogenic">Ketogenic</option>
+          </select>
+          <label for="floatingSelect">Do you follow a special diet?</label>
+        </div>
+        <button (click)="getData()" class="btn btn-primary m-1">Search</button>
+
+        <div class="searchResults">
+          @if (mySearch) {
+            <h3>Results for {{mySearch}}</h3>
+          } @else {
+            <h3>Suggestions</h3>
+          }
+          <div class="row">
+          @for (element of this.search; track element.id) {
+            <div class="card" style="width: 18rem; margin: 10px;" >
+              <img src="{{element.image}}" class="card-img-top" alt="{{element.title}}">
+              <div class="card-body">
+                <h5 class="card-title">{{element.title}}</h5>
+                <button (click)="getRecipe(element.id)" class="btn btn-primary">Let's cook!</button>
+              </div>
+            </div>
+          } @empty {
+            No recipes found
+          }
+        </div>
+        </div>
+      </div>
+     
+     <div class="recipeInformation">
+      <button (click)="hideRecipeInformation = true" class="btn btn-primary">Back</button>
+      @if (results) {
+        <h3>{{results.title}}</h3>
+        <img src="{{results.image}}" alt="{{results.title}}">
+        <p>Diets: {{results.diets}}</p>
+        <p>Ready in {{results.readyInMinutes}} minutes.</p>
+        <p>Serves {{results.servings}} people</p>
+        <div class="ingredients">
+          <b>Ingredients</b>
+          @for (ingredient of results.extendedIngredients; track ingredient.id) {
+            <li>{{ingredient.original}}</li>
+          }
+        </div>
+        <b>Instructions</b>
+        <p [innerHTML]="results.instructions"></p>
+      }
+      </div>
+    </div>
+  </div>
+</div>
+ 
+<router-outlet></router-outlet>
