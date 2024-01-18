@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
+
  
 @Component({
   selector: 'app-root',
@@ -25,6 +26,7 @@ export class HomeComponent {
   element: any;
   mySearch: string = '';
   myDiet: string = '{{value}}';
+  myCuisine: string = `{{id}}`;
   hideRecipeInformation: boolean = true;
   /* apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8';  Key Jill*/
   apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
@@ -32,7 +34,7 @@ export class HomeComponent {
   
  /* Search through recipes in API based on user input */
   getData() {
-    fetch(this.url  + this.apiKey + '&query=' + this.mySearch + '&diet=' + this.myDiet)
+    fetch(this.url  + this.apiKey + '&query=' + this.mySearch + '&diet=' + this.myDiet + '&cuisine=' + this.myCuisine)
       .then(response => response.json())
       .then(json => {
           this.recipes = json.results;
