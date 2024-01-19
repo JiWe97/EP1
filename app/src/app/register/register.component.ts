@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { UserService } from '../shared/user.service';
 
 @Component({
   selector: 'app-register',
@@ -15,16 +16,24 @@ export class RegisterComponent {
   password:string='';
   userName:string='';
 
+  constructor(private userService: UserService) {}
 
-  register() {
+  onSubmit() {
     console.log('You have been registered:', {
       firstName: this.firstName,
       lastName: this.lastName,
       email: this.email,
-      password: this.password
+      password: this.password,
+      userName: this.userName
     });
 
+    // acces the service and send username and password
+    this.userService.register(this.userName, this.password, this.firstName, this.lastName, this.email);
     alert('Registration successful!'); // Show a notification
     console.log('You have been registered'); // Log to console
+  
+      // clear the fields;
+      this.userName = '';
+      this.password = '';
   }
 }
