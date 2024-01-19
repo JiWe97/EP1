@@ -5,6 +5,7 @@ import { RegisterComponent } from './register/register.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 
 
+// all local routes
 export const routes: Routes = [
     {
         path: '',
