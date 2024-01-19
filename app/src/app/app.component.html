@@ -26,6 +26,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="/register">Register</a>
               </li>
+              <li *ngIf="isLoggedIn()">Logged in as {{ getUsername() }}</li>
             </ul>
           </div>
         </div>
