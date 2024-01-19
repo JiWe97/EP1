@@ -15,7 +15,7 @@ export class UserService {
       lastName: lastName,
       email: email
     };
-    const result = await fetch('http://localhost:3000/users', {
+    const result = await fetch('http://localhost:8000/api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

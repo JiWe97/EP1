@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { Env } from '../env';
 
 @Component({
   selector: 'app-root',
@@ -23,6 +24,11 @@ export class HomeComponent {
   apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8&query=';
   apiHost: string = 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
   i: any;
+  config: Env = {
+    production: false,
+    api: 'http://127.0.0.1:8000',
+    version:"1.0.0"
+  }
   
 
   getData() {
