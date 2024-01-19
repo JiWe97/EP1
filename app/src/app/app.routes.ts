@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 
+
 // all local routes
 export const routes: Routes = [
     {

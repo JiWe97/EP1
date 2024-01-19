@@ -1,63 +1,127 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { MyRecipesService } from '../../shared/my-recipes.service';
-import { Observable } from 'rxjs';
+// import { MyRecipesService } from '../../shared/my-recipes.service';
+import { FormsModule} from '@angular/forms';
+// import { CommonModule } from '@angular/common';
+// import { Observable } from 'rxjs';
+// import { MyUsers } from '../my-users.interface';
 
 @Component({
   selector: 'app-create-recipe',
   templateUrl: './create-recipe.component.html',
-  styleUrls: ['./create-recipe.component.css']
+  styleUrls: ['./create-recipe.component.css'],
+  imports: [
+    FormsModule
+    
+  ],
+  standalone: true,
+  providers: [
+    // MyRecipesService
+  ]
 })
 export class CreateRecipeComponent implements OnInit {
-  recipesObservable = this.recipeService.getRecipes();
-  // recipes: MyRecipesService[];
+  title: string = '';
+  description: string = '';
+  ingredients: string[] = [''];
+  steps: string[] = [''];
+  loadRecipes: boolean = true;
+  ingredientsInput: string[] = [``];
+  // ingredientsList: string[] = [];
+  stepsInput: string[] = [''];
+  // config: Env = {
+  //   production: false,
+  //   api: 'http://localhost:3000',
+  //   version: "1.0.0"
+    
+  // }
 
-  // const mappedRecipesObservable = recipesObservable.pipe(
-  //   ap((response) => response.data)
-  // );
+  // recipesObservable = this.recipeService.getRecipes();
 
-  recipes: any[] = [];
-
-
+  myRecipes: any[] = [];
+  dbURL: string = '../../db/db.json';
+  pageURL: string = 'http://localhost:3000/recipes';
   constructor(
-    private http: HttpClient,
-    private recipeService: MyRecipesService
+    // private recipeService: MyRecipesService,
+    // private fb: FormBuilder
   ) {}
 
   ngOnInit() {
     this.fetchMyData();
+    // console.log(this.recipesObservable)
   }
 
   fetchMyData() {
-    this.recipeService.getRecipes().subscribe(recipes => {
-      this.recipes = recipes;
-    }, error => {
-      console.error('Error fetching recipes:', error);
-    });
+    // this.recipeService.getRecipes().subscribe(recipes => {
+    //   this.recipes = recipes;
+    // }, error => {
+    //   console.error('Error fetching recipes:', error);
+    // });
+    fetch(this.pageURL)
+    .then(response => response.json())
+    .then(json => {
+
+      this.myRecipes = json;
+      console.log(json);
+    }
+    )
+    .catch(
+      error => console.error('Error fetching recipes:', error)
+    );
+  }
+  showRecipes()
+  {
+    this.loadRecipes = !this.loadRecipes;
   }
 
   postData() {
-    const data = {}; // Fill this object with your data
+    const data = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.3.0' },
+      body: JSON.stringify({
+        title: this.title,
+        // owner: " ",
+        // owner: this.owner,
+        description: this.description,
+        ingredients: [this.ingredients],
+        steps: [this.steps]
+      })
+    }; 
 
-    this.http.post('http://localhost:4200/recipes', JSON.stringify(data))
-      .subscribe(response => response.json(), error => console.error(error));
+    fetch('http://localhost:3000/recipes', data)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(error => console.error(error));
+
+    this.fetchMyData();
+    this.showRecipes();
   }
 
-  deleteTodo(id: number) {
-    this.http.delete('http://localhost:4200/recipes/' + id)
-      .subscribe(response => {
-        console.log('Todo deleted successfully!');
-        this.fetchMyData();
-      }, error => console.error(error));
+  addIngredient()
+  {
+    //<input type="text" class="form-control" id="ingredients{{ingredientsList.length}}" [(ngModel)]="ingredientsList" name="ingredient">
+    this.ingredientsInput.push(``);
   }
 
-  doneTodo(id: number) {
-    const data = { done: true };
-
-    this.http.patch('http://localhost:4200/recipes/' + id, JSON.stringify(data))
-      .subscribe(response => {
-        console.log('Todo marked as done successfully!');
-        this.fetchMyData();
-      }, error => console.error(error));
+  addStep(){
+    this.stepsInput.push('');
   }
+  // deleteTodo(id: number) {
+  //   this.http.delete('http://localhost:4200/recipes/' + id)
+  //     .subscribe(response => {
+  //       console.log('Todo deleted successfully!');
+  //       this.fetchMyData();
+  //     }, error => console.error(error));
+  // }
+
+  // doneTodo(id: number) {
+  //   const data = { done: true };
+
+  //   this.http.patch('http://localhost:4200/recipes/' + id, JSON.stringify(data))
+  //     .subscribe(response => {
+  //       console.log('Todo marked as done successfully!');
+  //       this.fetchMyData();
+  //     }, error => console.error(error));
+  // }
+
+
+ 
 }

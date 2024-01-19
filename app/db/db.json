@@ -1,0 +1,100 @@
+{
+  "recipes": [
+    {
+      "id": 1,
+      "title": "Chocolate Chip Cookies",
+      "description": "These delicious cookies are the perfect treat for any occasion.",
+      "ingredients": [
+        "2 cups all-purpose flour",
+        "1 cup granulated sugar",
+        "1 cup packed light brown sugar",
+        "1 teaspoon baking soda",
+        "1 teaspoon salt",
+        "2 sticks (1 cup) unsalted butter, softened",
+        "2 large eggs",
+        "2 teaspoons vanilla extract",
+        "2 cups semisweet chocolate chips"
+      ],
+      "steps": [
+        "Preheat oven to 375 degrees F (190 degrees C). Line baking sheets with parchment paper.",
+        "In a large bowl, cream together the butter and sugars until light and fluffy. Beat in the eggs one at a time, then stir in the vanilla.",
+        "In a separate bowl, whisk together the flour, baking soda, and salt. Gradually add to the wet ingredients, mixing until just combined. Stir in the chocolate chips.",
+        "Drop rounded tablespoons of dough onto the prepared baking sheets.",
+        "Bake for 10-12 minutes, or until edges are golden brown. Cool on baking sheets for a few minutes before transferring to a wire rack to cool completely."
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Macaroni and Cheese",
+      "description": "This creamy and cheesy macaroni and cheese is comfort food at its best.",
+      "ingredients": [
+        "1 pound elbow macaroni",
+        "1/2 cup butter",
+        "1/2 cup all-purpose flour",
+        "4 cups milk",
+        "4 cups shredded cheddar cheese",
+        "1/2 teaspoon salt",
+        "1/4 teaspoon black pepper"
+      ],
+      "steps": [
+        "Cook the macaroni according to package directions. Drain and set aside.",
+        "In a saucepan, melt the butter over medium heat. Whisk in the flour and cook for 1 minute. Gradually whisk in the milk, bring to a boil, and then reduce heat to low. Cook for 8-10 minutes, or until thickened.",
+        "Remove from heat and stir in the cheese, salt, and pepper until melted and smooth.",
+        "Pour the cheese sauce over the cooked macaroni and stir to combine."
+      ]
+    },
+    {
+      "title": "",
+      "owner": " ",
+      "description": "",
+      "ingredients": [],
+      "steps": [],
+      "id": 3
+    },
+    {
+      "title": "",
+      "owner": " ",
+      "description": "",
+      "ingredients": [],
+      "steps": [],
+      "id": 4
+    },
+    {
+      "title": "",
+      "owner": " ",
+      "description": "",
+      "ingredients": [],
+      "steps": [],
+      "id": 5
+    },
+    {
+      "title": "shrimp",
+      "description": "shrimp",
+      "ingredients": "shrimp",
+      "steps": "shrimp",
+      "id": 6
+    },
+    {
+      "title": "SHIDHIDHIWUHDIA",
+      "description": "odjwoedjwo",
+      "ingredients": [
+        "wkmdpwmdqk"
+      ],
+      "steps": [
+        "mdkmdklqemd"
+      ],
+      "id": 7
+    },
+    {
+      "title": "",
+      "description": "",
+      "ingredients": [
+        []
+      ],
+      "steps": [
+        []
+      ],
+      "id": 8
+    }
+  ]
+}
