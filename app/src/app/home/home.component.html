@@ -80,7 +80,9 @@
         </div>
         <b>Instructions</b>
         <p [innerHTML]="results.instructions"></p>
-      }
+      } @else {
+        <h3>Not able to display results, please contact support</h3>
+      } 
       </div>
     </div>
   </div>
