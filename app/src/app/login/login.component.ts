@@ -12,6 +12,7 @@ import { UserService } from '../shared/user.service';
 export class LoginComponent {
   userName!: string;
   password!: string;
+  showPassword: boolean = false;
 
   constructor(private userService: UserService) {}
 
@@ -28,7 +29,9 @@ export class LoginComponent {
 
     //console.log('Login successful for user:', this.userName);
   }
-
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
   
 // // logout method
 // 	logout() {

@@ -15,6 +15,7 @@ export class RegisterComponent {
   email:string='';
   password:string='';
   userName:string='';
+  showPassword: boolean = false;
 
   constructor(private userService: UserService) {}
 
@@ -36,4 +37,10 @@ export class RegisterComponent {
       this.userName = '';
       this.password = '';
   }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
 }
+
