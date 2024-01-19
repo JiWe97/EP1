@@ -14,7 +14,7 @@ import { FormsModule} from '@angular/forms';
   ],
   standalone: true,
   providers: [
-    MyRecipesService
+    // MyRecipesService
   ]
 })
 export class CreateRecipeComponent implements OnInit {
@@ -33,13 +33,13 @@ export class CreateRecipeComponent implements OnInit {
     
   // }
 
-  recipesObservable = this.recipeService.getRecipes();
+  // recipesObservable = this.recipeService.getRecipes();
 
   myRecipes: any[] = [];
   dbURL: string = '../../db/db.json';
   pageURL: string = 'http://localhost:3000/recipes';
   constructor(
-    private recipeService: MyRecipesService,
+    // private recipeService: MyRecipesService,
     // private fb: FormBuilder
   ) {}
 
