@@ -1,0 +1,14 @@
+<h1>Favorites</h1>
+<div class="row">
+    @for (favorite of favorites; track favorite.id) {
+      <div class="card" style="width: 18rem; margin: 10px;" >
+        <img src="{{favorite.image}}" class="card-img-top" alt="{{favorite.title}}">
+        <div class="card-body">
+          <h5 class="card-title">{{favorite.title}}</h5>
+          <button class="btn btn-primary">Let's cook!</button>
+        </div>
+      </div>
+    } @empty {
+      No favorites found
+    }
+</div>
