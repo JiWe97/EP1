@@ -24,9 +24,9 @@ export class CreateRecipeComponent implements OnInit {
   ingredients: string[] = [''];
   steps: string[] = [''];
   loadRecipes: boolean = true;
-  ingredientsInput: string[] = [``];
+  ingredientsInput: any[] = [''];
   // ingredientsList: string[] = [];
-  stepsInput: string[] = [''];
+  stepsInput: any[] = [''];
   // config: Env = {
   //   production: false,
   //   api: 'http://localhost:3000',

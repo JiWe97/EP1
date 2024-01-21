@@ -37,7 +37,7 @@
             <option id="thai">Thai</option>
             <option id="vietnamese">Vietnamese</option>
           </select>
-          <label for="floatingSelect">Do you follow a special diet?</label>
+          <label for="floatingSelect">Which cuisine do you like?</label>
         </div>
         <button (click)="getData()" class="btn btn-primary m-1">Search</button>
 
@@ -54,7 +54,7 @@
               <div class="card-body">
                 <h5 class="card-title">{{element.title}}</h5>
                 <button (click)="getRecipe(element.id)" class="btn btn-primary">Let's cook!</button>
-                <button class="btn btn-primary"><i class="fa-regular fa-heart"></i></button>
+                <button (click)="addFavorite(element.id)" class="btn btn-primary"> Add to favorites</button>
               </div>
             </div>
           } @empty {
@@ -64,8 +64,9 @@
         </div>
       </div>
      
-     <div class="recipeInformation">
-      <button (click)="hideRecipeInformation = true" class="btn btn-primary">Back</button>
+     <div class="recipeInformation" *ngIf="hideSearchInformation">
+      <button (click)="goBack()" class="btn btn-primary">Back</button>
+      <button (click)="addFavorite(element.id)" class="btn btn-primary">Add to favorites</button>
       @if (results) {
         <h3>{{results.title}}</h3>
         <img src="{{results.image}}" alt="{{results.title}}">
