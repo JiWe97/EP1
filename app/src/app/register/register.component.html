@@ -10,6 +10,8 @@
               class="form-control"
               id="lastName"
               placeholder="Last Name"
+              [(ngModel)]="lastName"
+              required
             />
           </div>
           <div class="mb-3">
@@ -18,6 +20,8 @@
               class="form-control"
               id="firstName"
               placeholder="First Name"
+              [(ngModel)]="firstName"
+              required
             />
           </div>
           <div class="mb-3">
@@ -26,18 +30,43 @@
               class="form-control"
               id="Username"
               placeholder="User Name"
+              [(ngModel)]="userName"
+              required
             />
           </div>
           <div class="mb-3">
             <input
-              type="password"
+              type="text"
+              class="form-control"
+              id="Email"
+              placeholder="Email"
+              [(ngModel)]="email"
+              required
+            />
+          </div>
+          <div class="mb-3">
+            <input
+              type="{{ showPassword ? 'text' : 'password' }}"
               class="form-control"
               id="password"
               placeholder="Password"
+              [(ngModel)]="password"
+              required
             />
+            <button
+              class="btn btn-dark mt-2"
+              (click)="togglePasswordVisibility()"
+            >
+              Show password
+            </button>
           </div>
+
           <div class="text-center">
-            <button type="submit" class="btn btn-primary px-5 mb-5 w-100">
+            <button
+              type="submit"
+              class="btn btn-primary px-5 mb-5 w-100"
+              (click)="onSubmit()"
+            >
               Sign Up
             </button>
           </div>

@@ -29,6 +29,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="/favorites">Favorites</a>
               </li>
+              <li *ngIf="isLoggedIn()">Logged in as {{ getUsername() }}</li>
             </ul>
           </div>
         </div>
