@@ -13,9 +13,6 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent {
   isLoggedIn() {
-    // Implement logic to check if the user is logged in
-    console.log('You are logged in');
-    
     const token = localStorage.getItem('token');
     return token !== null; // Return true if a token is found
   }

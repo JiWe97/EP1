@@ -26,6 +26,7 @@ export class LoginComponent {
       localStorage.setItem('token', token);
       //Redirect to protected component
       this.router.navigate(['/home']);
+      console.log('Login successful for user:', this.userName);
 
     } else {
       alert('Invalid username or password.');
@@ -41,5 +42,6 @@ export class LoginComponent {
 	logout() {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
+    console.log('Logged out successfully');
     }
 }
