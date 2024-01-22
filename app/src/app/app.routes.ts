@@ -7,6 +7,7 @@ import { NgModule } from '@angular/core';
 import { authGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
 import { FavoritesComponent } from './favorites/favorites.component';
+import { ContactComponent } from './contact/contact.component';
 
 
 // all local routes
@@ -35,6 +36,11 @@ export const routes: Routes = [
     {
         path: 'favorites',
         component: FavoritesComponent,
+    },
+    {
+        path: 'contact',
+        // canActivate: [authGuard],
+        component: ContactComponent,
     }
 ];
 
