@@ -10,7 +10,7 @@
               class="form-control"
               id="Username"
               placeholder="User Name"
-              [ngModel]="userName"
+              [(ngModel)]="userName"
               name="userName"
               required
             />
@@ -21,7 +21,7 @@
               class="form-control"
               id="password"
               placeholder="Password"
-              [ngModel]="password"
+              [(ngModel)]="password"
               name="password"
               required
             />
@@ -39,6 +39,12 @@
               (click)="onSubmit()"
             >
               Login
+            </button>
+            <button
+              class="btn btn-dark mt-2"
+              (click)="logout()"
+            >
+              Logout
             </button>
           </div>
           <div id="notRegistered" class="form-text text-center mb-5 text-dark">
