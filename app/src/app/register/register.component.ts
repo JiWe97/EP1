@@ -20,6 +20,23 @@ export class RegisterComponent {
   constructor(private userService: UserService) {}
 
   onSubmit() {
+    const options = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.6.0'},
+      body: JSON.stringify({
+         "firstname": this.firstName,
+         "email": this.email,
+         "password": this.password,
+         "lastname": this.lastName,
+         "username": this.userName
+      })
+     };
+    
+    fetch('http://localhost:8000/api/users', options)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(err => console.error(err));
+      
     console.log('You have been registered:', {
       firstName: this.firstName,
       lastName: this.lastName,

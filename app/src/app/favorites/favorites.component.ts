@@ -16,11 +16,16 @@ export class FavoritesComponent {
    myFavorite: string = '';
    favorite: any;
    savedRecipes: any [] = [];
+   userId: string = '';
+   recipeId: string = '';
   getFavorites() {
     const options = {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1'},
-      body: '{"user_id":7,"recipe_id":716428}'
+      body: JSON.stringify({
+        "userId": this.userId,
+        "recipeId": this.recipeId,
+     })
     };
     
     fetch(this.url, options)

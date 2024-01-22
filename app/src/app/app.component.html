@@ -32,6 +32,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="/favorites">Favorites</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="/create-recipe">My recipes</a>
+              </li>
+              <li *ngIf="isLoggedIn()">Logged in as {{ getUsername() }}</li>
             </ul>
           </div>
         </div>
