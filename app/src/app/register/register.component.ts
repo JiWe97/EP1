@@ -36,6 +36,10 @@ export class RegisterComponent {
       // clear the fields;
       this.userName = '';
       this.password = '';
+      this.firstName = '';
+      this.lastName = '';
+      this.email = '';
+      
   }
 
   togglePasswordVisibility(): void {
