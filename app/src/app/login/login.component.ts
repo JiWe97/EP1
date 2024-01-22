@@ -17,7 +17,7 @@ export class LoginComponent {
   constructor(private userService: UserService) {}
 
   async onSubmit() {
-    const token = await this.userService.login(this.userName, this.password)
+    const token = await this.userService.login(this.userName, this.password);
     if (token) {
       //Store token in local storage
       localStorage.setItem('token', token);
@@ -33,8 +33,8 @@ export class LoginComponent {
     this.showPassword = !this.showPassword;
   }
   
-// // logout method
-// 	logout() {
-//     localStorage.removeItem('token');
-//     }
+// logout method
+	logout() {
+    localStorage.removeItem('token');
+    }
 }
