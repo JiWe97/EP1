@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-// import { MyRecipesService } from '../../shared/my-recipes.service';
 import { FormsModule} from '@angular/forms';
 // import { CommonModule } from '@angular/common';
 // import { Observable } from 'rxjs';
@@ -24,9 +23,9 @@ export class CreateRecipeComponent implements OnInit {
   ingredients: string[] = [''];
   steps: string[] = [''];
   loadRecipes: boolean = true;
-  ingredientsInput: string[] = [``];
+  ingredientsInput: any[] = [''];
   // ingredientsList: string[] = [];
-  stepsInput: string[] = [''];
+  stepsInput: any[] = [''];
   // config: Env = {
   //   production: false,
   //   api: 'http://localhost:3000',
