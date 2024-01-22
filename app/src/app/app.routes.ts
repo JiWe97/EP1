@@ -35,6 +35,11 @@ export const routes: Routes = [
     {
         path: 'favorites',
         component: FavoritesComponent,
+    },
+    {
+        path: 'contact',
+        canActivate: [authGuard],
+        component: RegisterComponent,
     }
 ];
 
