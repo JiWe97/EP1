@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../shared/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +15,18 @@ export class LoginComponent {
   password!: string;
   showPassword: boolean = false;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   async onSubmit() {
+    
     const token = await this.userService.login(this.userName, this.password);
     if (token) {
       //Store token in local storage
+      localStorage.setItem('userName', this.userName.toString());
       localStorage.setItem('token', token);
       //Redirect to protected component
-      // ...
+      this.router.navigate(['/home']);
+
     } else {
       alert('Invalid username or password.');
     }
@@ -36,5 +40,6 @@ export class LoginComponent {
 // logout method
 	logout() {
     localStorage.removeItem('token');
+    localStorage.removeItem('userName');
     }
 }

@@ -14,13 +14,25 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent {
   isLoggedIn() {
     // Implement logic to check if the user is logged in
-    // For simplicity, you can return true/false based on a variable or authentication service
-    return true; // Placeholder value, update as needed
+    console.log('You are logged in');
+    
+    const token = localStorage.getItem('token');
+    return token !== null; // Return true if a token is found
   }
 
   getUsername() {
     // Implement logic to get the username of the logged-in user
-    // For simplicity, you can return a hardcoded username or retrieve it from an authentication service
-    return 'JohnDoe'; // Placeholder value, update as needed
+    try {
+      const userName = localStorage.getItem('userName');
+      if (userName) {
+        return userName;
+      } else {
+        // Handle case where userName is not set
+        return 'Unknown User'; // Placeholder, update as needed
+      }
+    } catch (e) {
+      console.error('Error accessing local storage:', e);
+      return 'Unknown User'; // Placeholder, handle this as per your application's logic
+    }
   }
 }

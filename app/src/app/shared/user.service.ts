@@ -35,7 +35,9 @@ export class UserService {
     // Checks user credentials and returns a valid token or null
     async  login(userName:  string, password:  string) {
       let users = await this.getUsers();
-      let user = users.find((u: { userName: string; password: string; }) => u.userName === userName);
+      
+      let user = users.find((u: { username: string; password: string; }) => u.username === userName);
+      
       if (user && bcrypt.compareSync(password, user.password)) {
         return user.id.toString();
       }
