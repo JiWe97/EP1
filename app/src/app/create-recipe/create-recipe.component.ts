@@ -20,8 +20,8 @@ export class CreateRecipeComponent implements OnInit {
   // }
 
   // recipesObservable = this.recipeService.getRecipes();
-  ingredientsInput = [''];
-  stepsInput = [''];
+  ingredientsInput:any[] = [''];
+  stepsInput:any[] = [''];
 
   myRecipes: any[] = [];
   dbURL: string = '../../db/db.json';
