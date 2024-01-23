@@ -12,10 +12,6 @@ export class CreateRecipeComponent implements OnInit {
   title: string = '';
   description: string = '';
   loadRecipes: boolean = true;
-<<<<<<< HEAD
-  ingredientsInput: any[] = [''];
-  // ingredientsList: string[] = [];
-  stepsInput: any[] = [''];
   // config: Env = {
   //   production: false,
   //   api: 'http://localhost:3000',
@@ -24,10 +20,8 @@ export class CreateRecipeComponent implements OnInit {
   // }
 
   // recipesObservable = this.recipeService.getRecipes();
-=======
   ingredientsInput = [''];
   stepsInput = [''];
->>>>>>> createRecipe
 
   myRecipes: any[] = [];
   dbURL: string = '../../db/db.json';
@@ -121,10 +115,5 @@ export class CreateRecipeComponent implements OnInit {
   // }
   
 
-<<<<<<< HEAD
  
 }
-=======
-  
-}
->>>>>>> createRecipe
