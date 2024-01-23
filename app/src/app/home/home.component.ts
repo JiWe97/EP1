@@ -86,12 +86,29 @@ export class HomeComponent {
     this.hideSearchInformation = false;
   }
 
-  addFavorite() {
+  addFavorite(id: any) {
+     /* try {
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        return userId;
+      } else {
+       console.log('No user ID found in local storage');
+       return '';
+      }
+    } catch (e) {
+      console.error('Error accessing local storage:', e);
+      return '';
+    } */
+    console.log(id);
     const options = {
-      method: 'GET',
-      headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1'}
-    };
-    
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1'},
+      body: JSON.stringify({
+        "user_id": this.userId,
+        "recipe_id": this.id
+      })
+    }
+
     fetch('http://localhost:8000/api/favorites', options)
       .then(response => response.json())
       .then(response => console.log(response))
