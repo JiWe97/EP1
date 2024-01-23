@@ -1,47 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-// import { MyRecipesService } from '../../shared/my-recipes.service';
 import { FormsModule} from '@angular/forms';
-// import { CommonModule } from '@angular/common';
-// import { Observable } from 'rxjs';
-// import { MyUsers } from '../my-users.interface';
 
 @Component({
   selector: 'app-create-recipe',
   templateUrl: './create-recipe.component.html',
   styleUrls: ['./create-recipe.component.css'],
-  imports: [
-    FormsModule
-    
-  ],
-  standalone: true,
-  providers: [
-    // MyRecipesService
-  ]
+  imports: [FormsModule],
+  standalone: true
 })
 export class CreateRecipeComponent implements OnInit {
   title: string = '';
   description: string = '';
-  ingredients: string[] = [''];
-  steps: string[] = [''];
   loadRecipes: boolean = true;
-  ingredientsInput: string[] = [``];
-  // ingredientsList: string[] = [];
-  stepsInput: string[] = [''];
-  // config: Env = {
-  //   production: false,
-  //   api: 'http://localhost:3000',
-  //   version: "1.0.0"
-    
-  // }
-
-  // recipesObservable = this.recipeService.getRecipes();
+  ingredientsInput = [''];
+  stepsInput = [''];
 
   myRecipes: any[] = [];
   dbURL: string = '../../db/db.json';
   pageURL: string = 'http://localhost:3000/recipes';
   constructor(
-    // private recipeService: MyRecipesService,
-    // private fb: FormBuilder
   ) {}
 
   ngOnInit() {
@@ -50,11 +27,6 @@ export class CreateRecipeComponent implements OnInit {
   }
 
   fetchMyData() {
-    // this.recipeService.getRecipes().subscribe(recipes => {
-    //   this.recipes = recipes;
-    // }, error => {
-    //   console.error('Error fetching recipes:', error);
-    // });
     fetch(this.pageURL)
     .then(response => response.json())
     .then(json => {
@@ -73,6 +45,17 @@ export class CreateRecipeComponent implements OnInit {
   }
 
   postData() {
+    console.log(this.ingredientsInput);
+    const ingredientValues = [...this.ingredientsInput];
+    console.log(ingredientValues);
+    this.ingredientsInput = [''];
+    alert(ingredientValues.join('\n'));
+
+    const stepValues = [...this.stepsInput];
+    console.log(stepValues);
+    this.stepsInput = [''];
+    alert(stepValues.join('\n'));
+    
     const data = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.3.0' },
@@ -81,8 +64,10 @@ export class CreateRecipeComponent implements OnInit {
         // owner: " ",
         // owner: this.owner,
         description: this.description,
-        ingredients: [this.ingredients],
-        steps: [this.steps]
+        ingredient: ingredientValues,
+        step: stepValues
+        // ingredients: [this.ingredients],
+        // steps: [this.steps]
       })
     }; 
 
@@ -97,7 +82,6 @@ export class CreateRecipeComponent implements OnInit {
 
   addIngredient()
   {
-    //<input type="text" class="form-control" id="ingredients{{ingredientsList.length}}" [(ngModel)]="ingredientsList" name="ingredient">
     this.ingredientsInput.push(``);
   }
 
@@ -121,7 +105,7 @@ export class CreateRecipeComponent implements OnInit {
   //       this.fetchMyData();
   //     }, error => console.error(error));
   // }
-
+  
 
   
 }
