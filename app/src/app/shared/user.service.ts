@@ -15,7 +15,7 @@ export class UserService {
       lastName: lastName,
       email: email
     };
-    const result = await fetch('http://127.0.0.1:8000/api/users', {
+    const result = await fetch('http://localhost:8000/api/users', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -25,24 +25,19 @@ export class UserService {
     return result.json();
   }
   
-  
-  constructor() { }
-  // //Dummy users to replace later.
-  // users = [
-  //   { id: 1, username: 'johndoe', password: 'password' },
-	//   { id: 2, username: 'janedoe', password: 'password' },
-  // ];
 
   // Returns all users
 
 	async getUsers() {
-      return  (await fetch('http://127.0.0.1:8000/api/users')).json()
+      return  (await fetch('http://localhost:8000/api/users')).json()
     }
   
     // Checks user credentials and returns a valid token or null
     async  login(userName:  string, password:  string) {
       let users = await this.getUsers();
+      
       let user = users.find((u: { username: string; password: string; }) => u.username === userName);
+      
       if (user && bcrypt.compareSync(password, user.password)) {
         return user.id.toString();
       }

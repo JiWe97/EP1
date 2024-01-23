@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../shared/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -17,9 +18,27 @@ export class RegisterComponent {
   userName:string='';
   showPassword: boolean = false;
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   onSubmit() {
+    this.router.navigate(['/login']);
+    const options = {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.6.0'},
+      body: JSON.stringify({
+         "firstname": this.firstName,
+         "email": this.email,
+         "password": this.password,
+         "lastname": this.lastName,
+         "username": this.userName
+      })
+     };
+    
+    fetch('http://localhost:8000/api/users', options)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(err => console.error(err));
+      
     console.log('You have been registered:', {
       firstName: this.firstName,
       lastName: this.lastName,

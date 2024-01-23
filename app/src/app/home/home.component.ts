@@ -4,7 +4,6 @@ import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCoffee } from '@fortawesome/free-solid-svg-icons';
 
  
 @Component({
@@ -31,6 +30,8 @@ export class HomeComponent {
   myCuisine: string = `{{id}}`;
   hideRecipeInformation: boolean = true;
   hideSearchInformation: boolean = false;
+  userId: string = '';
+  recipeId: string = '';
   /* apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8';  Key Jill*/
   apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
   apiHost: string = 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
@@ -85,9 +86,18 @@ export class HomeComponent {
     this.hideSearchInformation = false;
   }
 
- addFavorite(id:any) {
-   console.log(`Saved`,id,`to favorites`);
- }
+  addFavorite() {
+    const options = {
+      method: 'GET',
+      headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1'}
+    };
+    
+    fetch('http://localhost:8000/api/favorites', options)
+      .then(response => response.json())
+      .then(response => console.log(response))
+      .catch(err => console.error(err));
+      console.log('id and recipe id:', this.userId, this.recipeId);
+  }
  
 ngOnInit() {
   /* Renew getSuggestions when opening site to see the suggestions */
