@@ -32,8 +32,8 @@ export class HomeComponent {
   hideSearchInformation: boolean = false;
   userId: string = '';
   recipeId: string = '';
-  /* apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8';  Key Jill*/
-  apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
+  apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8';//  Key Jill*/
+  // apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
   apiHost: string = 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
   
   getSuggestions() {
@@ -100,20 +100,30 @@ export class HomeComponent {
       return '';
     } */
     console.log(id);
+
+    // fetch the token value from the localstorage and assign to a variable
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log('No token found in local storage');
+      return;
+    }
+
     const options = {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1'},
       body: JSON.stringify({
-        "user_id": this.userId,
-        "recipe_id": this.id
+        "user_id": token, // it needs to retrieved from the localstorage
+        "recipe_id": id
       })
     }
+
+    console.log('Options before fetch: '+JSON.stringify(options));
+    
 
     fetch('http://localhost:8000/api/favorites', options)
       .then(response => response.json())
       .then(response => console.log(response))
-      .catch(err => console.error(err));
-      console.log('id and recipe id:', this.userId, this.recipeId);
+      .catch(err => console.error(err)); 
   }
  
 ngOnInit() {
