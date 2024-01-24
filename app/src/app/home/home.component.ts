@@ -30,7 +30,7 @@ export class HomeComponent {
   myCuisine: string = `{{id}}`;
   hideRecipeInformation: boolean = true;
   hideSearchInformation: boolean = false;
-  userId: string = '';
+  userId: any;
   recipeId: string = '';
   apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8';//  Key Jill*/
   // apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
@@ -87,39 +87,25 @@ export class HomeComponent {
   }
 
   addFavorite(id: any) {
-     /* try {
-      const userId = localStorage.getItem('userId');
-      if (userId) {
-        return userId;
-      } else {
-       console.log('No user ID found in local storage');
-       return '';
-      }
-    } catch (e) {
-      console.error('Error accessing local storage:', e);
-      return '';
-    } */
     console.log(id);
-
     // fetch the token value from the localstorage and assign to a variable
     const token = localStorage.getItem('token');
     if (!token) {
       console.log('No token found in local storage');
       return;
+    } else {
+      console.log('Token found in local storage:', token);
     }
 
     const options = {
       method: 'POST',
       headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1'},
       body: JSON.stringify({
-        "user_id": token, // it needs to retrieved from the localstorage
+        "user_id": token, // it needs to be retrieved from the localstorage
         "recipe_id": id
       })
     }
-
     console.log('Options before fetch: '+JSON.stringify(options));
-    
-
     fetch('http://localhost:8000/api/favorites', options)
       .then(response => response.json())
       .then(response => console.log(response))
