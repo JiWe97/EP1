@@ -1,0 +1,49 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h3>My Recipes</h3>
+            <div class="searchResults">
+           <!--  @if (myRecipe) {
+              <h3>Results for {{myRecipe}}</h3>
+            } @else {
+              <h3>Suggestions</h3>
+            }
+            <div class="row">
+            @for (element of this.recipe; track element.id) {
+              <div class="card" style="width: 18rem; margin: 10px;" >
+                <img src="{{element.image}}" class="card-img-top" alt="{{element.title}}">
+                <div class="card-body">
+                  <h5 class="card-title">{{element.title}}</h5>
+                  <button (click)="getRecipe(element.id)" class="btn btn-primary m-1">Let's cook!</button>
+                  <button (click)="addFavorite(userId,element.id)" class="btn btn-primary m-1"> Add to favorites</button>
+                  <button><i class="fa-regular fa-heart"></i></button> -->
+               <!--  </div>
+              </div>
+            } @empty {
+              No recipes found
+            } -->
+            </div>
+            <div class="addRecipes">
+                <form>
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" [(ngModel)]="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="ingredients">Ingredients</label>
+                        <input type="text" class="form-control" placeholder="ingredients" [(ngModel)]="ingredient" name="ingredients">
+                    </div>
+                    <div class="form-group">
+                        <label for="steps">Steps</label>
+                            <input type="text" class="form-control" placeholder="steps" [(ngModel)]="step" name="steps">
+                    </div>
+                    <div class="form-group">
+                      <label for="steps"></label>
+                          <input type="text" class="form-control" placeholder="user_id" [(ngModel)]="userId" name="userId">
+                  </div>
+                </form>
+                <button (click)="addRecipe()" class="btn btn-primary">Add Recipe</button>
+            </div>
+        </div>
+    </div>
+</div>
