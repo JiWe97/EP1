@@ -87,18 +87,6 @@ export class HomeComponent {
   }
 
   addFavorite(id: any) {
-     /* try {
-      const userId = localStorage.getItem('userId');
-      if (userId) {
-        return userId;
-      } else {
-       console.log('No user ID found in local storage');
-       return '';
-      }
-    } catch (e) {
-      console.error('Error accessing local storage:', e);
-      return '';
-    } */
     console.log(id);
 
     // fetch the token value from the localstorage and assign to a variable
