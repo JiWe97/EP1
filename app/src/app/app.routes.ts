@@ -8,6 +8,7 @@ import { authGuard } from './auth.guard';
 import { LoginComponent } from './login/login.component';
 import { FavoritesComponent } from './favorites/favorites.component';
 import { ContactComponent } from './contact/contact.component';
+import { MyRecipeComponent } from './my-recipe/my-recipe.component';
 
 
 // all local routes
@@ -41,6 +42,10 @@ export const routes: Routes = [
         path: 'contact',
         // canActivate: [authGuard],
         component: ContactComponent,
+    },
+    {
+        path: 'my-recipe',
+        component: MyRecipeComponent,
     }
 ];
 
