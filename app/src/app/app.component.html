@@ -31,7 +31,13 @@
               <li class="nav-item">
                 <a class="nav-link" href="/contact">Contact</a>
               </li>
-              <li *ngIf="isLoggedIn()">Logged in as {{ getUsername() }}</li>
+            </ul>
+          </div>
+          <div>
+            <ul>
+              <li style="list-style-type: none" *ngIf="isLoggedIn()">
+                Logged in as {{ getUsername() }}
+              </li>
             </ul>
           </div>
           <div class="dropdown">

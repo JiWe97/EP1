@@ -76,9 +76,19 @@
                 alt="{{ element.title }}"
               />
               <div class="card-body">
-                <h5 class="card-title">{{element.title}}</h5>
-                <button (click)="getRecipe(element.id)" class="btn btn-primary m-1">Let's cook!</button>
-                <button (click)="addFavorite(element.id)" class="btn btn-primary m-1"> Add to favorites</button>
+                <h5 class="card-title">{{ element.title }}</h5>
+                <button
+                  (click)="getRecipe(element.id)"
+                  class="btn btn-primary m-1"
+                >
+                  Let's cook!
+                </button>
+                <button
+                  (click)="addFavorite(element.id)"
+                  class="btn btn-primary m-1"
+                >
+                  Add to favorites
+                </button>
                 <h5 class="card-title">{{ element.title }}</h5>
                 <button
                   (click)="getRecipe(element.id)"
@@ -99,20 +109,10 @@
           </div>
         </div>
       </div>
-     <div class="recipeInformation" *ngIf="hideSearchInformation">
-      <button (click)="goBack()" class="btn btn-primary">Back</button>
-      <button (click)="addFavorite(results.id)" class="btn btn-primary">Add to favorites</button>
-      @if (results) {
-        <h3>{{results.title}}</h3>
-        <img src="{{results.image}}" alt="{{results.title}}">
-        <p>Diets: {{results.diets}}</p>
-        <p>Ready in {{results.readyInMinutes}} minutes.</p>
-        <p>Serves {{results.servings}} people</p>
-
       <div class="recipeInformation" *ngIf="hideSearchInformation">
         <button (click)="goBack()" class="btn btn-primary">Back</button>
-        <button (click)="addFavorite(results.id)" class="btn btn-primary m-1">
-          <i class="fa-regular fa-heart"></i>
+        <button (click)="addFavorite(results.id)" class="btn btn-primary">
+          Add to favorites
         </button>
         @if (results) {
         <h3>{{ results.title }}</h3>
@@ -120,21 +120,34 @@
         <p>Diets: {{ results.diets }}</p>
         <p>Ready in {{ results.readyInMinutes }} minutes.</p>
         <p>Serves {{ results.servings }} people</p>
-        <div class="ingredients">
-          <b>Ingredients</b>
-          @for (ingredient of results.extendedIngredients; track ingredient.id)
-          {
-          <li>{{ ingredient.original }}</li>
+        }
+        <div class="recipeInformation" *ngIf="hideSearchInformation">
+          <button (click)="goBack()" class="btn btn-primary">Back</button>
+          <button (click)="addFavorite(results.id)" class="btn btn-primary m-1">
+            <i class="fa-regular fa-heart"></i>
+          </button>
+          @if (results) {
+          <h3>{{ results.title }}</h3>
+          <img src="{{ results.image }}" alt="{{ results.title }}" />
+          <p>Diets: {{ results.diets }}</p>
+          <p>Ready in {{ results.readyInMinutes }} minutes.</p>
+          <p>Serves {{ results.servings }} people</p>
+          <div class="ingredients">
+            <b>Ingredients</b>
+            @for (ingredient of results.extendedIngredients; track
+            ingredient.id) {
+            <li>{{ ingredient.original }}</li>
+            }
+          </div>
+          <b>Instructions</b>
+          <p [innerHTML]="results.instructions"></p>
+          } @else {
+          <h3>Not able to display results, please contact support</h3>
           }
         </div>
-        <b>Instructions</b>
-        <p [innerHTML]="results.instructions"></p>
-        } @else {
-        <h3>Not able to display results, please contact support</h3>
-        }
       </div>
     </div>
   </div>
-</div>
 
-<router-outlet></router-outlet>
+  <router-outlet></router-outlet>
+</div>
