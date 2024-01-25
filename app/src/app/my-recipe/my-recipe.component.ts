@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-my-recipe',
@@ -23,6 +23,7 @@ mySearch: string = '';
 search: any;
 /* showAddRecipe: boolean = true;
 showSearchRecipe: boolean = false; */
+constructor(private toastr: ToastrService) { }
 
 getToken() {
   const token = localStorage.getItem('token');
@@ -35,6 +36,9 @@ getToken() {
 }
 
   addRecipe() {
+    this.toastr.success('Berry nice, you have added this recipe to your collection.', '', {
+      
+    })
     const token = localStorage.getItem('token');
     const options = {
       method: 'POST',

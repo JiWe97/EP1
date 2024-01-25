@@ -93,6 +93,8 @@ export class HomeComponent {
   }
 
   addFavorite(id: any) {
+    this.toastr.success('Pear-fect, you have added this recipe to your favorites', '', {
+    })
     console.log(id);
     // fetch the token value from the localstorage and assign to a variable
     const token = localStorage.getItem('token');
