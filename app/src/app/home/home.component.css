@@ -12,9 +12,33 @@ h1 {
   background-color: #638889;
   border: none;
 }
+.btn:hover {
+  background-color: #638889ad;
+}
+input {
+  background-color: rgba(245, 245, 220, 0.453);
+  text-align: center;
+}
+select {
+  background-color: rgba(245, 245, 220, 0.453);
+  width: 300%;
+  margin: 10px;
+}
+
+.selectField {
+  display: flex;
+  flex-direction: row;
+  justify-content:space-around;
+}
+
+.label {
+  background-color: transparent;
+  border: none;
+}
 /*card*/
 .card {
   padding: 10px;
+  background-color: beige;
 }
 .card a:hover {
   background-color: #9dccbb;
