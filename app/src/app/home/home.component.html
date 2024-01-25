@@ -1,66 +1,51 @@
 <head>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <div class="container">
   <div class="row">
     <div class="col-md-12">
       <div class="search" *ngIf="hideRecipeInformation">
-        <h1>I would like to eat...</h1>
+        <h1>What do you want to eat?</h1>
         <!-- Dietary options -->
-        <input
-          type="text"
-          class="form-control m-1 searchA"
-          [(ngModel)]="mySearch"
-          placeholder="What do you want to eat?"
-        />
-        <div class="selectField">
-            <div class="form-floating mr-10 " style="float: left;">
-              <select
-                class="form-select searchB"
-                id="floatingSelect"
-                aria-label="Floating label select example"
-                [(ngModel)]="myDiet"
-              >
-                <option value="none">None</option>
-                <option value="vegetarian">Vegetarian</option>
-                <option value="vegan">Vegan</option>
-                <option value="pescetarian">Pescetarian</option>
-                <option value="lowfodmap">Low fodmap</option>
-                <option value="glutenfree">Gluten free</option>
-                <option value="dairyfree">Dairy free</option>
-                <option value="paleo">Paleo</option>
-                <option value="ketogenic">Ketogenic</option>
-              </select>
-              <label for="floatingSelect" class="label">Do you follow a special diet?</label>
-            </div>
-            <!-- Options in cuisine -->
-            <div class="form-floating m-1" style="float: left;">
-              <select
-                class="form-select searchC"
-                id="floatingSelect"
-                aria-label="Floating label select example"
-                [(ngModel)]="myCuisine"
-              >
-                <option id="none">None</option>
-                <option id="african">African</option>
-                <option id="asian">Asian</option>
-                <option id="chinese">Chinese</option>
-                <option id="european">European</option>
-                <option id="greek">Greek</option>
-                <option id="indian">Indian</option>
-                <option id="italian">Italian</option>
-                <option id="japanese">Japanese</option>
-                <option id="korean">Korean</option>
-                <option id="mexican">Mexican</option>
-                <option id="thai">Thai</option>
-                <option id="vietnamese">Vietnamese</option>
-              </select>
-              <label for="floatingSelect">Which cuisine do you like?</label>
+        <input type="text" class="form-control m-1 searchA" [(ngModel)]="mySearch"
+          placeholder="I would like to eat..." />
+        <div class="textCenter">
+          <div class="form-floating m-1">
+            <select class="form-select searchB" id="floatingSelect" aria-label="Floating label select example"
+              [(ngModel)]="myDiet" aria-placeholder="Do you follow a special diet?">
+              <option value="none">None</option>
+              <option value="vegetarian">Vegetarian</option>
+              <option value="vegan">Vegan</option>
+              <option value="pescetarian">Pescetarian</option>
+              <option value="lowfodmap">Low fodmap</option>
+              <option value="glutenfree">Gluten free</option>
+              <option value="dairyfree">Dairy free</option>
+              <option value="paleo">Paleo</option>
+              <option value="ketogenic">Ketogenic</option>
+            </select>
+            <label for="floatingSelect">Do you follow a special diet?</label>
           </div>
+          <!-- Options in cuisine -->
+          <div class="form-floating m-1">
+            <select class="form-select searchC" id="floatingSelect" aria-label="Floating label select example"
+              [(ngModel)]="myCuisine">
+              <option id="none">None</option>
+              <option id="african">African</option>
+              <option id="asian">Asian</option>
+              <option id="chinese">Chinese</option>
+              <option id="european">European</option>
+              <option id="greek">Greek</option>
+              <option id="indian">Indian</option>
+              <option id="italian">Italian</option>
+              <option id="japanese">Japanese</option>
+              <option id="korean">Korean</option>
+              <option id="mexican">Mexican</option>
+              <option id="thai">Thai</option>
+              <option id="vietnamese">Vietnamese</option>
+            </select>
+            <label for="floatingSelect">Which cuisine do you like?</label>
           </div>
+        </div>
         <button (click)="getData()" class="btn btn-primary m-1">Search</button>
 
         <div class="searchResults">
@@ -72,46 +57,14 @@
           <div class="row">
             @for (element of this.search; track element.id) {
             <div class="card" style="width: 18rem; margin: 10px">
-              <img
-                src="{{ element.image }}"
-                class="card-img-top"
-                alt="{{ element.title }}"
-              />
+              <img src="{{ element.image }}" class="card-img-top" alt="{{ element.title }}" />
               <div class="card-body">
                 <h5 class="card-title">{{ element.title }}</h5>
-                <button
-                  (click)="getRecipe(element.id)"
-                  class="btn btn-primary m-1"
-                >
-                  Let's cook!
-                </button>
-                <button
-                  (click)="addFavorite(element.id)"
-                  class="btn btn-primary m-1"
-                >
-                  Add to favorites
-                </button>
-                <h5 class="card-title">{{ element.title }}</h5>
-                <button
-                  (click)="getRecipe(element.id)"
-                  class="btn btn-primary m-1"
-                >
-                  Let's cook!
-                </button>
-                <button
-                  (click)="addFavorite(element.id)"
-                  class="btn btn-primary m-1"
-                >
-                  <i
-                    *ngIf="likedRecipes[element.id]"
-                    class="fa-solid fa-heart"
-                  ></i>
-                  <i
-                    *ngIf="!likedRecipes[element.id]"
-                    class="fa-regular fa-heart"
-                  ></i>
-                </button>
-                <!-- <button><i class="fa-regular fa-heart"></i></button> -->
+                <button (click)="getRecipe(element.id)" class="btn btn-primary m-1">Let's cook!</button>
+                <button (click)="addFavorite(element.id)" class="btn btn-primary m-1">
+                  <i *ngIf="likedRecipes[element.id]" class="fa-solid fa-heart"></i>
+                  <i *ngIf="!likedRecipes[element.id]" class="fa-regular fa-heart"></i>
+                 </button>
               </div>
             </div>
             } @empty { No recipes found }
@@ -120,8 +73,8 @@
       </div>
       <div class="recipeInformation" *ngIf="hideSearchInformation">
         <button (click)="goBack()" class="btn btn-primary">Back</button>
-        <button (click)="addFavorite(results.id)" class="btn btn-primary">
-          Add to favorites
+        <button (click)="addFavorite(results.id)" class="btn btn-primary m-1">
+          <i class="fa-regular fa-heart"></i>
         </button>
         @if (results) {
         <h3>{{ results.title }}</h3>
@@ -129,50 +82,18 @@
         <p>Diets: {{ results.diets }}</p>
         <p>Ready in {{ results.readyInMinutes }} minutes.</p>
         <p>Serves {{ results.servings }} people</p>
-        }
-        <div class="recipeInformation" *ngIf="hideSearchInformation">
-          <button (click)="goBack()" class="btn btn-primary">Back</button>
-          <button (click)="addFavorite(results.id)" class="btn btn-primary">
-            Add to favorites
-          </button>
-          @if (results) {
-          <h3>{{ results.title }}</h3>
-          <img src="{{ results.image }}" alt="{{ results.title }}" />
-          <p>Diets: {{ results.diets }}</p>
-          <p>Ready in {{ results.readyInMinutes }} minutes.</p>
-          <p>Serves {{ results.servings }} people</p>
+        <div class="ingredients">
+          <b>Ingredients</b>
+          @for (ingredient of results.extendedIngredients; track ingredient.id)
+          {
+          <li>{{ ingredient.original }}</li>
           }
-          <div class="recipeInformation" *ngIf="hideSearchInformation">
-            <button (click)="goBack()" class="btn btn-primary">Back</button>
-            <button
-              (click)="addFavorite(results.id)"
-              class="btn btn-primary m-1"
-            >
-              <i class="fa-regular fa-heart"></i>
-            </button>
-            @if (results) {
-            <h3>{{ results.title }}</h3>
-            <img src="{{ results.image }}" alt="{{ results.title }}" />
-            <p>Diets: {{ results.diets }}</p>
-            <p>Ready in {{ results.readyInMinutes }} minutes.</p>
-            <p>Serves {{ results.servings }} people</p>
-            <div class="ingredients">
-              <b>Ingredients</b>
-              @for (ingredient of results.extendedIngredients; track
-              ingredient.id) {
-              <li>{{ ingredient.original }}</li>
-              }
-            </div>
-            <b>Instructions</b>
-            <p [innerHTML]="results.instructions"></p>
-            } @else {
-            <h3>Not able to display results, please contact support</h3>
-            }
-          </div>
         </div>
+        <b>Instructions</b>
+        <p [innerHTML]="results.instructions"></p>
+        } @else {
+        <h3>Not able to display results, please contact support</h3>
+        }
       </div>
-    </div>
 
-    <router-outlet></router-outlet>
-  </div>
-</div>
+      <router-outlet></router-outlet>

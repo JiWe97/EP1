@@ -6,20 +6,20 @@ import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrService } from 'ngx-toastr';
 
- 
+
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [CommonModule, RouterOutlet, FormsModule, FontAwesomeModule],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css',
- 
+
 })
 export class HomeComponent {
   /* title: string = 'Eindproef Frontend'; */
-  creators:string = 'Jill Wets (Scrum master), Shelsy De Ryck & Vicki Ramsdonck';
+  creators: string = 'Jill Wets (Scrum master), Shelsy De Ryck & Vicki Ramsdonck';
   url: string = 'https://api.spoonacular.com/recipes/complexSearch?';
-  recipes: any [] = [];
+  recipes: any[] = [];
   results: any;
   search: any;
   title: any;
@@ -33,21 +33,32 @@ export class HomeComponent {
   hideSearchInformation: boolean = false;
   userId: any;
   recipeId: string = '';
-  likedRecipes: {[key: string]: boolean} = {};
-
+  likedRecipes: { [key: string]: boolean } = {};
   // apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8'; /* /  Key Jill*/
   // apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
-  apiKey: string = 'apiKey=396ee1bd3a5849709f010c5c693ea80e'; /*  Key Jill2  */
+  // apiKey: string = 'apiKey=396ee1bd3a5849709f010c5c693ea80e'; /*  Key Jill2  */
+  apiKey: string = 'apiKey=2e956ecadaf540638938a49e14e44ee6'; /*  Key Jill3  */
   apiHost: string = 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
 
   constructor(private toastr: ToastrService) { }
-  
+
+  // Retrieve user_id from local storage
+  getToken() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log('No token found in local storage');
+      return;
+    } else {
+      console.log('Token found in local storage:', token);
+    }
+  }
+
   getSuggestions() {
-    fetch(this.url  + this.apiKey + '&query=' + this.mySearch)
+    fetch(this.url + this.apiKey + '&query=' + this.mySearch)
       .then(response => response.json())
       .then(json => {
-          this.recipes = json.results;
-          this.search = this.recipes.filter(recipes => recipes.title.includes(this.mySearch));
+        this.recipes = json.results;
+        this.search = this.recipes.filter(recipes => recipes.title.includes(this.mySearch));
         if (this.search) {
           console.log('Recipes:', this.search);
         } else {
@@ -56,15 +67,15 @@ export class HomeComponent {
       })
       .catch(err => console.error(err));
   }
- /* Search through recipes in API based on user input */
+  /* Search through recipes in API based on user input */
   getData() {
     this.hideRecipeInformation = true;
     this.hideSearchInformation = false;
-    fetch(this.url  + this.apiKey + '&query=' + this.mySearch + '&diet=' + this.myDiet + '&cuisine=' + this.myCuisine)
+    fetch(this.url + this.apiKey + '&query=' + this.mySearch + '&diet=' + this.myDiet + '&cuisine=' + this.myCuisine)
       .then(response => response.json())
       .then(json => {
-          this.recipes = json.results;
-          this.search = this.recipes.filter(recipes => recipes.title.includes(this.mySearch));
+        this.recipes = json.results;
+        this.search = this.recipes.filter(recipes => recipes.title.includes(this.mySearch));
         if (this.search) {
           console.log('Recipes:', this.search);
         } else {
@@ -73,18 +84,18 @@ export class HomeComponent {
       })
       .catch(err => console.error(err));
   }
- 
+
   /* Search through recipes in API based on id */
   getRecipe(id: any) {
     this.hideRecipeInformation = false;
     this.hideSearchInformation = true;
-    const options = {method: 'GET', headers: {'User-Agent': 'insomnia/8.4.5'}};
+    const options = { method: 'GET', headers: { 'User-Agent': 'insomnia/8.4.5' } };
     fetch('https://api.spoonacular.com/recipes/' + id + '/information?' + this.apiKey, options)
-    .then(response => response.json())
-    .then(json => {
-      this.results = json;
-    })
-    .catch(err => console.error(err));
+      .then(response => response.json())
+      .then(json => {
+        this.results = json;
+      })
+      .catch(err => console.error(err));
   }
 
   goBack() {
@@ -96,38 +107,50 @@ export class HomeComponent {
     this.toastr.success('Pear-fect, you have added this recipe to your favorites', '', {
     })
     console.log(id);
-    // fetch the token value from the localstorage and assign to a variable
     const token = localStorage.getItem('token');
-    if (!token) {
-      console.log('No token found in local storage');
-      return;
-    } else {
-      console.log('Token found in local storage:', token);
-    }
-
     const options = {
       method: 'POST',
-      headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1'},
+      headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1' },
       body: JSON.stringify({
         "user_id": token, // it needs to be retrieved from the localstorage
         "recipe_id": id
       })
     }
     fetch('http://localhost:8000/api/favorites', options)
-    .then(response => response.json())
-    .then(response => {
-      console.log(response);
-      this.likedRecipes[id] = !this.likedRecipes[id]; // toggle the state
-      localStorage.setItem('likedRecipes', JSON.stringify(this.likedRecipes)); // save the state
-    })
-    .catch(err => console.error(err)); 
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        this.likedRecipes[id] = !this.likedRecipes[id]; // toggle the state
+        localStorage.setItem('likedRecipes', JSON.stringify(this.likedRecipes)); // save the state
+      })
+      .catch(err => console.error(err));
+  }
+  /* toggleFavorite(id: any) {
+    // fetch the token value from the localstorage and assign to a variable
+    const token = localStorage.getItem('token');
+    const options = {
+       method: this.likedRecipes[id] ? 'DELETE' : 'POST',
+       headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1' },
+       body: JSON.stringify({
+         "user_id": token, // it needs to be retrieved from the localstorage
+         "recipe_id": id
+       })
+    }
+   
+    fetch(`http://localhost:8000/api/favorites/` + id, options)
+       .then(response => response.json())
+       .then(response => {
+         console.log(response);
+         this.likedRecipes[id] = !this.likedRecipes[id]; // toggle the state
+         localStorage.setItem('likedRecipes', JSON.stringify(this.likedRecipes)); // save the state
+       })
+       .catch(err => console.error(err));
+   } */
+
+  ngOnInit() {
+    /* Renew getSuggestions when opening site to see the suggestions */
+    this.getSuggestions();
+    const savedState = localStorage.getItem('likedRecipes');
+    this.likedRecipes = savedState ? JSON.parse(savedState) : {};
+  }
 }
- 
-ngOnInit() {
-  /* Renew getSuggestions when opening site to see the suggestions */
-  this.getSuggestions();
-  const savedState = localStorage.getItem('likedRecipes');
-  this.likedRecipes = savedState ? JSON.parse(savedState) : {};
-}
-}
- 

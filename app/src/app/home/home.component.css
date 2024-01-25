@@ -21,14 +21,11 @@ input {
 }
 select {
   background-color: rgba(245, 245, 220, 0.453);
-  width: 300%;
+  width: 50%;
   margin: 10px;
 }
-
-.selectField {
-  display: flex;
-  flex-direction: row;
-  justify-content:space-around;
+.text-center {
+  justify-content: center;
 }
 
 .label {
