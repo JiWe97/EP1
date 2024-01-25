@@ -1,14 +1,38 @@
 <h1>Favorites</h1>
-<div class="row">
-    @for (favorite of favorites; track favorite.id) {
-      <div class="card" style="width: 18rem; margin: 10px;" >
-        <img src="{{favorite.image}}" class="card-img-top" alt="{{favorite.title}}">
-        <div class="card-body">
-          <h5 class="card-title">{{favorite.title}}</h5>
-          <button class="btn btn-primary">Let's cook!</button>
+  <div class="row" *ngIf="hideRecipeInformation">
+      @for (favorite_recipe of favorite_recipes; track favorite_recipe.id) {
+        <div class="card" style="width: 18rem; margin: 10px;" >
+          <img src="{{favorite_recipe.image}}" class="card-img-top" alt="{{favorite_recipe.title}}">
+          <div class="card-body">
+            <h5 class="card-title">{{favorite_recipe.title}}</h5>
+            <button class="btn btn-primary">Let's cook!</button>
+           <!--  (click)="getRecipe(favorite_recipe.id)" -->
+          </div>
         </div>
+      } @empty {
+        <h3>You don't have any favorites yet.</h3>
+      } 
+  </div>
+    <!-- <div class="recipeInformation" *ngIf="hideSearchInformation">
+      <button (click)="goBack()" class="btn btn-primary">Back</button>
+      @if (results) {
+        <h3>{{favorite_recipe.title}}</h3>
+        <img src="{{favorite_recipe.title}}" alt="{{favorite_recipe.title}}">
+        <p>Diets: {{favorite_recipe.title}}</p>
+        <p>Ready in {{favorite_recipe.title}} minutes.</p>
+        <p>Serves {{favorite_recipe.title}} people</p>
+        <div class="ingredients">
+          <b>Ingredients</b>
+          @for (ingredient of favorite_recipe.extendedIngredients; track ingredient.id) {
+            <li>{{ingredient.original}}</li>
+          }
+        </div>
+        <b>Instructions</b>
+        <p [innerHTML]="favorite_recipe.instructions"></p>
+      } @else {
+        <h3>Not able to display results, please contact support</h3>
+      } 
       </div>
-    } @empty {
-      No favorites found
-    }
-</div>
+ -->
+
+  

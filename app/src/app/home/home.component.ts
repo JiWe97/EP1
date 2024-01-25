@@ -32,8 +32,8 @@ export class HomeComponent {
   hideSearchInformation: boolean = false;
   userId: any;
   recipeId: string = '';
-  apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8';//  Key Jill*/
-  // apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
+  apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8'; /* /  Key Jill*/
+  //apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
   apiHost: string = 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
   
   getSuggestions() {
