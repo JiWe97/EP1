@@ -1,7 +1,6 @@
 import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
-import { CreateRecipeComponent } from './create-recipe/create-recipe.component';
 import { NgModule } from '@angular/core';
 //import auth guard and login component
 import { authGuard } from './auth.guard';
@@ -29,10 +28,6 @@ export const routes: Routes = [
     {
         path: 'register',
         component: RegisterComponent,
-    },
-    {
-        path: 'create-recipe',
-        component: CreateRecipeComponent,
     },
     {
         path: 'favorites',
