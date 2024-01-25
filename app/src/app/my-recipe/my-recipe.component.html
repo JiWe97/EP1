@@ -1,27 +1,32 @@
 <div class="container">
     <div class="row">
         <div class="col-md-12">
-            <h3>My Recipes</h3>
-            <div class="searchResults">
-           <!--  @if (myRecipe) {
-              <h3>Results for {{myRecipe}}</h3>
-            } @else {
-              <h3>Suggestions</h3>
-            }
-            <div class="row">
-            @for (element of this.recipe; track element.id) {
-              <div class="card" style="width: 18rem; margin: 10px;" >
-                <img src="{{element.image}}" class="card-img-top" alt="{{element.title}}">
-                <div class="card-body">
-                  <h5 class="card-title">{{element.title}}</h5>
-                  <button (click)="getRecipe(element.id)" class="btn btn-primary m-1">Let's cook!</button>
-                  <button (click)="addFavorite(userId,element.id)" class="btn btn-primary m-1"> Add to favorites</button>
-                  <button><i class="fa-regular fa-heart"></i></button> -->
-               <!--  </div>
-              </div>
-            } @empty {
-              No recipes found
-            } -->
+          @if (recipes) {
+            <h3>My recipes</h3>
+          } @else {
+            <h5>You don't have any recipes yet</h5>
+          }
+          <button (click)="addRecipe()" class="btn btn-primary m-1">Add Recipe</button>
+          <input type="text" [(ngModel)]="mySearch" placeholder="Search recipes" class="form-control">
+                <button (click)="searchRecipe()" class="btn btn-primary m-1">Search</button>
+            <div class="ownRecipes">
+              <div class="row">
+              @for (recipe of recipe; track recipe.id) {
+                <div class="row">
+                  <div class="col-sm-6 mb-3 mb-sm-0">
+                    <div class="card">
+                      <div class="card-body">
+                        <h5 class="card-title">{{recipe.title}}</h5>
+                        <p class="card-text">{{recipe.ingredient}}</p>
+                        <p class="card-text">{{recipe.step}}</p>
+                        <a href="#" class="btn btn-primary">Let's Cook!</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              } @empty {
+                You don't have any recipes yet.
+              }
             </div>
             <div class="addRecipes">
                 <form>
@@ -30,20 +35,47 @@
                         <input type="text" class="form-control" id="title" name="title" [(ngModel)]="title">
                     </div>
                     <div class="form-group">
-                        <label for="ingredients">Ingredients</label>
-                        <input type="text" class="form-control" placeholder="ingredients" [(ngModel)]="ingredient" name="ingredients">
-                    </div>
+                      <label for="ingredients">Ingredients</label>
+                          <input type="text" class="form-control" placeholder="ingredients" [(ngModel)]="ingredient" name="ingredients">
+                      </div>
                     <div class="form-group">
                         <label for="steps">Steps</label>
                             <input type="text" class="form-control" placeholder="steps" [(ngModel)]="step" name="steps">
                     </div>
-                    <div class="form-group">
-                      <label for="steps"></label>
-                          <input type="text" class="form-control" placeholder="user_id" [(ngModel)]="userId" name="userId">
-                  </div>
                 </form>
                 <button (click)="addRecipe()" class="btn btn-primary">Add Recipe</button>
             </div>
         </div>
     </div>
+    <!-- <div class="form-group">
+      <label for="ingredients">Ingredients</label>
+      @for (field of fieldsArray; track $index) {
+        <div>
+            <input class="form-control mb-1" type="text" [(ngModel)]="fieldsArray[$index]" name="ingredients" placeholder="Ingredient {{ $index + 1 }}">
+        </div>
+        }
+        <button class="btn btn-primary m-1" type="button" (click)="addField()">Add ingredient</button>
+      </div> -->
+
+
+
+     <!-- When recipes are public
+       <div class="searchResults">
+        <div class="row">
+        @for (element of recipes; track element.id) {
+          <div class="row">
+            <div class="col-sm-6 mb-3 mb-sm-0">
+              <div class="card">
+                <div class="card-body">
+                  <h5 class="card-title">{{element.title}}</h5>
+                  <p class="card-text">{{element.ingredient}}</p>
+                  <p class="card-text">{{element.id}}</p>
+                  <a href="#" class="btn btn-primary">Go somewhere</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        } @empty {
+          You don't have any recipes yet.
+        } -->
 </div>

@@ -1,65 +1,79 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-favorites',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './favorites.component.html',
   styleUrl: './favorites.component.css'
 })
 export class FavoritesComponent {
   url: string = 'http://localhost:8000/api/favorites';
   apiUrl: string = 'https://api.spoonacular.com/recipes/716428/information';
-  favorites: any[] = [];
-   /* apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8';  Key Jill*/
-   apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
-   myFavorite: string = '';
-   favorite: any;
+  favoritesFromDB: any[] = [];
+  favorite_recipes: any[] = [];
+   apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8';  /* Key Jill */
+   //apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
    savedRecipes: any [] = [];
-   userId: string = '';
-   recipeId: string = '';
-  getFavorites() {
-    const options = {
-      method: 'GET',
-      headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1'},
-      body: JSON.stringify({
-        "user_id": this.userId,
-        "recipe_id": this.recipeId,
-     })
-    };
-    
-    fetch(this.url, options)
-      .then(response => response.json())
-      .then(response => console.log(response))
-      .catch(err => console.error(err));
-      console.log('id and recipe id:', this.userId, this.recipeId);
+   user_id: string = '';
+   recipe_id: any;
+   id: any;
+   results: any;
+   hideRecipeInformation: boolean = true;
+   hideSearchInformation: boolean = false;
+   
+
+   getToken() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log('No token found in local storage');
+      return;
+    } else {
+      console.log('Token found in local storage:', token);
+    }
   }
-/*   getSuggestions() {
-    fetch(this.url  + this.apiKey + '&query=' + this.myFavorite)
-      .then(response => response.json())
-      .then(json => {
-          this.savedRecipes = json;
-          this.favorite = this.savedRecipes.filter(savedRecipes => savedRecipes.title.includes(this.myFavorite));
-        if (this.favorite) {
-          console.log('Recipes:', this.favorite);
-        } else {
-          console.log(`No recipes found for ${this.favorite}`);
-        }
-      })
-      .catch(err => console.error(err));
-  } */
-  /* postRecipe(id: any) {
+  getFavorites() {
+    const token = localStorage.getItem('token');
+    fetch(this.url)
+    .then(response => response.json())
+    .then(json => {
+        this.savedRecipes = json;
+        this.favoritesFromDB = this.savedRecipes.filter(favorite => favorite.user_id === Number(token));
+      if (this.favoritesFromDB) {
+        console.log('Favorites:', this.favoritesFromDB);
+        this.favorite_recipes = this.favoritesFromDB.map((favoriteFromDB) => this.postFavorites(favoriteFromDB.recipe_id));
+        
+      } else {
+        console.log('No favorites found');
+      }
+    })
+    .catch(err => console.error(err));
+  }
+
+  postFavorites(id: any) {
     const options = {method: 'GET', headers: {'User-Agent': 'insomnia/8.4.5'}};
+    console.log('https://api.spoonacular.com/recipes/' + id + '/information?' + this.apiKey);
+    
     fetch('https://api.spoonacular.com/recipes/' + id + '/information?' + this.apiKey, options)
     .then(response => response.json())
     .then(json => {
-      this.savedRecipes = json;
+      return json;
     })
     .catch(err => console.error(err));
+  }
+
+  /* getRecipe(id: any) {
+     this.hideRecipeInformation = false;
+    this.hideSearchInformation = true;
   } */
 
+  goBack() {
+    this.hideRecipeInformation = true;
+    this.hideSearchInformation = false;
+  }
+
   ngOnInit() {
-    console.log('Favorites:', this.favorites); 
     this.getFavorites();
   }
 }
