@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { UserService } from '../shared/user.service';
 import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginComponent {
   password!: string;
   showPassword: boolean = false;
 
-  constructor(private userService: UserService, private router: Router) {}
+
+  constructor(private userService: UserService, private router: Router, private toastr: ToastrService) {}
 
   async onSubmit() {
     
@@ -27,9 +29,14 @@ export class LoginComponent {
       //Redirect to protected component
       this.router.navigate(['/home']);
       console.log('Login successful for user:', this.userName);
-
+      this.toastr.success('Login successful for user:', this.userName, {
+        positionClass: 'toast-bottom-right'
+      });
     } else {
-      alert('Invalid username or password.');
+      //toastr in the bottom right corner
+      this.toastr.warning('Invalide username or password. Please try again.', '', {
+        positionClass: 'toast-bottom-right'
+      });
     }
 
     //console.log('Login successful for user:', this.userName);
@@ -43,5 +50,8 @@ export class LoginComponent {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
     console.log('Logged out successfully');
+    this.toastr.success('Logged out successfully', '', {
+      positionClass: 'toast-bottom-right'
+    });
     }
 }
