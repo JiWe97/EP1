@@ -1,5 +1,26 @@
 
+h1 {
+  font-size: 50px;
+  font-family: "Cormorant Garamond";
+  text-align: center;
+  border-bottom: 3px double black;
+}
 
+.btn {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  background-color: #638889;
+  border: none;
+}
+/*card*/
+.card {
+  padding: 10px;
+}
+.card a:hover {
+  background-color: #9dccbb;
+}
+
+/* Collapse */
 .collapse {
     &:not(.show) {
       display: none;
