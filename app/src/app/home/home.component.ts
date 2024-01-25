@@ -4,6 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ToastrService } from 'ngx-toastr';
 
  
 @Component({
@@ -38,6 +39,8 @@ export class HomeComponent {
   // apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
   apiKey: string = 'apiKey=396ee1bd3a5849709f010c5c693ea80e'; /*  Key Jill2  */
   apiHost: string = 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
+
+  constructor(private toastr: ToastrService) { }
   
   getSuggestions() {
     fetch(this.url  + this.apiKey + '&query=' + this.mySearch)
