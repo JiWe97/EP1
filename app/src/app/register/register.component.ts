@@ -50,7 +50,7 @@ export class RegisterComponent {
 
     // acces the service and send username and password
     this.userService.register(this.userName, this.password, this.firstName, this.lastName, this.email);// Show a notification
-    this.toastr.success('Registration successful', '', {
+    this.toastr.success('Egg-celent, you have been registered!', '', {
       positionClass: 'toast-bottom-right'
     });
     console.log('You have been registered'); // Log to console

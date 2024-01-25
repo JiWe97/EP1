@@ -29,12 +29,12 @@ export class LoginComponent {
       //Redirect to protected component
       this.router.navigate(['/home']);
       console.log('Login successful for user:', this.userName);
-      this.toastr.success('Login successful for user:', this.userName, {
+      this.toastr.success('We are so hap-pea to see you', this.userName, {
         positionClass: 'toast-bottom-right'
       });
     } else {
       //toastr in the bottom right corner
-      this.toastr.warning('Invalide username or password. Please try again.', '', {
+      this.toastr.warning('Holy guacemoly, you have entered an invalid username or password!', '', {
         positionClass: 'toast-bottom-right'
       });
     }
@@ -50,7 +50,7 @@ export class LoginComponent {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
     console.log('Logged out successfully');
-    this.toastr.success('Logged out successfully', '', {
+    this.toastr.success('Donut pho-get about us, we will miss you', '', {
       positionClass: 'toast-bottom-right'
     });
     }
