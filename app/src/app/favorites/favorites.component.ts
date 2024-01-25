@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-favorites',
@@ -24,6 +25,10 @@ export class FavoritesComponent {
   results: any;
   hideRecipeInformation: boolean = true;
   hideSearchInformation: boolean = false;
+  likedRecipes: { [key: string]: boolean } = {};
+
+  constructor(private toastr: ToastrService) { }
+
    
 // Retrieve user_id from local storage
    getToken() {
@@ -74,6 +79,29 @@ export class FavoritesComponent {
       this.results = json;
     })
     .catch(err => console.error(err));
+  }
+
+  addFavorite(id: any) {
+    this.toastr.success('Pear-fect, you have added this recipe to your favorites', '', {
+    })
+    console.log(id);
+    const token = localStorage.getItem('token');
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1' },
+      body: JSON.stringify({
+        "user_id": token, // it needs to be retrieved from the localstorage
+        "recipe_id": id
+      })
+    }
+    fetch('http://localhost:8000/api/favorites', options)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        this.likedRecipes[id] = !this.likedRecipes[id]; // toggle the state
+        localStorage.setItem('likedRecipes', JSON.stringify(this.likedRecipes)); // save the state
+      })
+      .catch(err => console.error(err));
   }
 
 

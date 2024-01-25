@@ -21,8 +21,15 @@ input {
 }
 select {
   background-color: rgba(245, 245, 220, 0.453);
-  width: 50%;
-  margin: 10px;
+  text-align: center;
+}
+
+.form-block {
+  display: flex;
+  justify-content: center;
+}
+.form-floating {
+  width: 100%;
 }
 .text-center {
   justify-content: center;
@@ -32,6 +39,7 @@ select {
   background-color: transparent;
   border: none;
 }
+
 /*card*/
 .card {
   padding: 10px;

@@ -3,16 +3,17 @@
 </head>
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-md-12 input-field">
       <div class="search" *ngIf="hideRecipeInformation">
         <h1>What do you want to eat?</h1>
         <!-- Dietary options -->
         <input type="text" class="form-control m-1 searchA" [(ngModel)]="mySearch"
           placeholder="I would like to eat..." />
-        <div class="textCenter">
+        <div class="row-md-12 form-block">
           <div class="form-floating m-1">
-            <select class="form-select searchB" id="floatingSelect" aria-label="Floating label select example"
-              [(ngModel)]="myDiet" aria-placeholder="Do you follow a special diet?">
+            <select class="form-select searchB" id="floatingSelect"
+              [(ngModel)]="myDiet">
+              <option value="" selected disabled>Do you follow a special diet?</option>
               <option value="none">None</option>
               <option value="vegetarian">Vegetarian</option>
               <option value="vegan">Vegan</option>
@@ -23,12 +24,12 @@
               <option value="paleo">Paleo</option>
               <option value="ketogenic">Ketogenic</option>
             </select>
-            <label for="floatingSelect">Do you follow a special diet?</label>
           </div>
           <!-- Options in cuisine -->
           <div class="form-floating m-1">
-            <select class="form-select searchC" id="floatingSelect" aria-label="Floating label select example"
+            <select class="form-select searchC" id="floatingSelect"
               [(ngModel)]="myCuisine">
+              <option value="" selected disabled>What cuisine do you like?</option>
               <option id="none">None</option>
               <option id="african">African</option>
               <option id="asian">Asian</option>
@@ -43,7 +44,6 @@
               <option id="thai">Thai</option>
               <option id="vietnamese">Vietnamese</option>
             </select>
-            <label for="floatingSelect">Which cuisine do you like?</label>
           </div>
         </div>
         <button (click)="getData()" class="btn btn-primary m-1">Search</button>
