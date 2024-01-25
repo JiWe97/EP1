@@ -102,7 +102,7 @@
         <p>Diets: {{results.diets}}</p>
         <p>Ready in {{results.readyInMinutes}} minutes.</p>
         <p>Serves {{results.servings}} people</p>
-
+      }
       <div class="recipeInformation" *ngIf="hideSearchInformation">
         <button (click)="goBack()" class="btn btn-primary">Back</button>
         <button (click)="addFavorite(results.id)" class="btn btn-primary">
@@ -127,8 +127,5 @@
         <h3>Not able to display results, please contact support</h3>
         }
       </div>
-    </div>
-  </div>
-</div>
 
 <router-outlet></router-outlet>

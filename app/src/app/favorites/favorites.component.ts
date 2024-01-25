@@ -13,8 +13,9 @@ export class FavoritesComponent {
   apiUrl: string = 'https://api.spoonacular.com/recipes/716428/information';
   favoritesFromDB: any[] = [];
   favorite_recipes: any[] = [];
-   apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8';  /* Key Jill */
-   //apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
+   // apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8'; /* /  Key Jill*/
+  // apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
+  apiKey: string = 'apiKey=396ee1bd3a5849709f010c5c693ea80e'; /*  Key Jill2  */
    savedRecipes: any [] = [];
    user_id: string = '';
    recipe_id: any;
@@ -43,7 +44,7 @@ export class FavoritesComponent {
       if (this.favoritesFromDB) {
         console.log('Favorites:', this.favoritesFromDB);
         this.favorite_recipes = this.favoritesFromDB.map((favoriteFromDB) => this.postFavorites(favoriteFromDB.recipe_id));
-        
+        console.log('response', this.favorite_recipes);
       } else {
         console.log('No favorites found');
       }
@@ -58,6 +59,7 @@ export class FavoritesComponent {
     fetch('https://api.spoonacular.com/recipes/' + id + '/information?' + this.apiKey, options)
     .then(response => response.json())
     .then(json => {
+      console.log('json', json);
       return json;
     })
     .catch(err => console.error(err));
@@ -75,5 +77,6 @@ export class FavoritesComponent {
 
   ngOnInit() {
     this.getFavorites();
+    this.postFavorites(this.recipe_id);
   }
 }
