@@ -32,6 +32,8 @@ export class HomeComponent {
   hideSearchInformation: boolean = false;
   userId: any;
   recipeId: string = '';
+  likedRecipes: {[key: string]: boolean} = {};
+
   // apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8'; /* /  Key Jill*/
   // apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
   apiKey: string = 'apiKey=396ee1bd3a5849709f010c5c693ea80e'; /*  Key Jill2  */
@@ -106,16 +108,21 @@ export class HomeComponent {
         "recipe_id": id
       })
     }
-    console.log('Options before fetch: '+JSON.stringify(options));
     fetch('http://localhost:8000/api/favorites', options)
-      .then(response => response.json())
-      .then(response => console.log(response))
-      .catch(err => console.error(err)); 
-  }
+    .then(response => response.json())
+    .then(response => {
+      console.log(response);
+      this.likedRecipes[id] = !this.likedRecipes[id]; // toggle the state
+      localStorage.setItem('likedRecipes', JSON.stringify(this.likedRecipes)); // save the state
+    })
+    .catch(err => console.error(err)); 
+}
  
 ngOnInit() {
   /* Renew getSuggestions when opening site to see the suggestions */
   this.getSuggestions();
+  const savedState = localStorage.getItem('likedRecipes');
+  this.likedRecipes = savedState ? JSON.parse(savedState) : {};
 }
 }
  

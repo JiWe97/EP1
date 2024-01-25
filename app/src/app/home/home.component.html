@@ -90,7 +90,8 @@
                   (click)="addFavorite(element.id)"
                   class="btn btn-primary m-1"
                 >
-                  <i class="fa-regular fa-heart"></i>
+                  <i *ngIf="likedRecipes[element.id]" class="fa-solid fa-heart"></i>
+                  <i *ngIf="!likedRecipes[element.id]" class="fa-regular fa-heart"></i>
                 </button>
                 <!-- <button><i class="fa-regular fa-heart"></i></button> -->
               </div>
