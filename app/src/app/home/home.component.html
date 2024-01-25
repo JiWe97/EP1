@@ -1,12 +1,22 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-      <div class="search"  *ngIf="hideRecipeInformation">
+      <div class="search" *ngIf="hideRecipeInformation">
         <h1>What do you want to eat?</h1>
         <!-- Dietary options -->
-        <input type="text" class="form-control m-1" [(ngModel)]="mySearch" placeholder="What do you want to eat?">
+        <input
+          type="text"
+          class="form-control m-1"
+          [(ngModel)]="mySearch"
+          placeholder="What do you want to eat?"
+        />
         <div class="form-floating m-1">
-          <select class="form-select" id="floatingSelect" aria-label="Floating label select example" [(ngModel)]="myDiet">
+          <select
+            class="form-select"
+            id="floatingSelect"
+            aria-label="Floating label select example"
+            [(ngModel)]="myDiet"
+          >
             <option value="none">None</option>
             <option value="vegetarian">Vegetarian</option>
             <option value="vegan">Vegan</option>
@@ -21,7 +31,12 @@
         </div>
         <!-- Options in cuisine -->
         <div class="form-floating m-1">
-          <select class="form-select" id="floatingSelect" aria-label="Floating label select example" [(ngModel)]="myCuisine">
+          <select
+            class="form-select"
+            id="floatingSelect"
+            aria-label="Floating label select example"
+            [(ngModel)]="myCuisine"
+          >
             <option id="none">None</option>
             <option id="african">African</option>
             <option id="asian">Asian</option>
@@ -42,28 +57,42 @@
 
         <div class="searchResults">
           @if (mySearch) {
-            <h3>Results for {{mySearch}}</h3>
+          <h3>Results for {{ mySearch }}</h3>
           } @else {
-            <h3>Suggestions</h3>
+          <h3>Suggestions</h3>
           }
           <div class="row">
-          @for (element of this.search; track element.id) {
-            <div class="card" style="width: 18rem; margin: 10px;" >
-              <img src="{{element.image}}" class="card-img-top" alt="{{element.title}}">
+            @for (element of this.search; track element.id) {
+            <div class="card" style="width: 18rem; margin: 10px">
+              <img
+                src="{{ element.image }}"
+                class="card-img-top"
+                alt="{{ element.title }}"
+              />
               <div class="card-body">
                 <h5 class="card-title">{{element.title}}</h5>
                 <button (click)="getRecipe(element.id)" class="btn btn-primary m-1">Let's cook!</button>
                 <button (click)="addFavorite(element.id)" class="btn btn-primary m-1"> Add to favorites</button>
+                <h5 class="card-title">{{ element.title }}</h5>
+                <button
+                  (click)="getRecipe(element.id)"
+                  class="btn btn-primary m-1"
+                >
+                  Let's cook!
+                </button>
+                <button
+                  (click)="addFavorite(element.id)"
+                  class="btn btn-primary m-1"
+                >
+                  Add to favorites
+                </button>
                 <!-- <button><i class="fa-regular fa-heart"></i></button> -->
               </div>
             </div>
-          } @empty {
-            No recipes found
-          }
-        </div>
+            } @empty { No recipes found }
+          </div>
         </div>
       </div>
-     
      <div class="recipeInformation" *ngIf="hideSearchInformation">
       <button (click)="goBack()" class="btn btn-primary">Back</button>
       <button (click)="addFavorite(results.id)" class="btn btn-primary">Add to favorites</button>
@@ -73,20 +102,33 @@
         <p>Diets: {{results.diets}}</p>
         <p>Ready in {{results.readyInMinutes}} minutes.</p>
         <p>Serves {{results.servings}} people</p>
+
+      <div class="recipeInformation" *ngIf="hideSearchInformation">
+        <button (click)="goBack()" class="btn btn-primary">Back</button>
+        <button (click)="addFavorite(results.id)" class="btn btn-primary">
+          Add to favorites
+        </button>
+        @if (results) {
+        <h3>{{ results.title }}</h3>
+        <img src="{{ results.image }}" alt="{{ results.title }}" />
+        <p>Diets: {{ results.diets }}</p>
+        <p>Ready in {{ results.readyInMinutes }} minutes.</p>
+        <p>Serves {{ results.servings }} people</p>
         <div class="ingredients">
           <b>Ingredients</b>
-          @for (ingredient of results.extendedIngredients; track ingredient.id) {
-            <li>{{ingredient.original}}</li>
+          @for (ingredient of results.extendedIngredients; track ingredient.id)
+          {
+          <li>{{ ingredient.original }}</li>
           }
         </div>
         <b>Instructions</b>
         <p [innerHTML]="results.instructions"></p>
-      } @else {
+        } @else {
         <h3>Not able to display results, please contact support</h3>
-      } 
+        }
       </div>
     </div>
   </div>
 </div>
- 
+
 <router-outlet></router-outlet>
