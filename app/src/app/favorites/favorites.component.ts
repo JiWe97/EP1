@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-favorites',
@@ -14,17 +15,22 @@ export class FavoritesComponent {
   favoritesFromDB: any[] = [];
   favorite_recipes: any[] = [];
    // apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8'; /* /  Key Jill*/
-  // apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
-  apiKey: string = 'apiKey=396ee1bd3a5849709f010c5c693ea80e'; /*  Key Jill2  */
-   savedRecipes: any [] = [];
-   user_id: string = '';
-   recipe_id: any;
-   id: any;
-   results: any;
-   hideRecipeInformation: boolean = true;
-   hideSearchInformation: boolean = false;
-   
+   // apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
+   // apiKey: string = 'apiKey=396ee1bd3a5849709f010c5c693ea80e'; /*  Key Jill2  */
+  apiKey: string = 'apiKey=2e956ecadaf540638938a49e14e44ee6'; /*  Key Jill3  */
+  savedRecipes: any [] = [];
+  user_id: string = '';
+  recipe_id: any;
+  id: any;
+  results: any;
+  hideRecipeInformation: boolean = true;
+  hideSearchInformation: boolean = false;
+  likedRecipes: { [key: string]: boolean } = {};
 
+  constructor(private toastr: ToastrService) { }
+
+   
+// Retrieve user_id from local storage
    getToken() {
     const token = localStorage.getItem('token');
     if (!token) {
@@ -34,6 +40,7 @@ export class FavoritesComponent {
       console.log('Token found in local storage:', token);
     }
   }
+  // Getting the data of the favorite recipes
   getFavorites() {
     const token = localStorage.getItem('token');
     fetch(this.url)
@@ -43,32 +50,60 @@ export class FavoritesComponent {
         this.favoritesFromDB = this.savedRecipes.filter(favorite => favorite.user_id === Number(token));
       if (this.favoritesFromDB) {
         console.log('Favorites:', this.favoritesFromDB);
-        this.favorite_recipes = this.favoritesFromDB.map((favoriteFromDB) => this.postFavorites(favoriteFromDB.recipe_id));
-        console.log('response', this.favorite_recipes);
+        this.favoritesFromDB.map((favoriteFromDB) => this.postFavorites(favoriteFromDB.recipe_id));
+        
       } else {
         console.log('No favorites found');
       }
     })
     .catch(err => console.error(err));
   }
-
+// Giving an overview of all the liked recipes
   postFavorites(id: any) {
     const options = {method: 'GET', headers: {'User-Agent': 'insomnia/8.4.5'}};
-    console.log('https://api.spoonacular.com/recipes/' + id + '/information?' + this.apiKey);
-    
     fetch('https://api.spoonacular.com/recipes/' + id + '/information?' + this.apiKey, options)
     .then(response => response.json())
     .then(json => {
-      console.log('json', json);
-      return json;
+      this.favorite_recipes.push(json);
+    })
+    .catch(err => console.error(err));
+  }
+// Showing the instructions of the recipe
+  getRecipe(id: any) {
+    this.hideRecipeInformation = false;
+    this.hideSearchInformation = true;
+    const options = {method: 'GET', headers: {'User-Agent': 'insomnia/8.4.5'}};
+    fetch('https://api.spoonacular.com/recipes/' + id + '/information?' + this.apiKey, options)
+    .then(response => response.json())
+    .then(json => {
+      this.results = json;
     })
     .catch(err => console.error(err));
   }
 
-  /* getRecipe(id: any) {
-     this.hideRecipeInformation = false;
-    this.hideSearchInformation = true;
-  } */
+  addFavorite(id: any) {
+    this.toastr.success('Pear-fect, you have added this recipe to your favorites', '', {
+    })
+    console.log(id);
+    const token = localStorage.getItem('token');
+    const options = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1' },
+      body: JSON.stringify({
+        "user_id": token, // it needs to be retrieved from the localstorage
+        "recipe_id": id
+      })
+    }
+    fetch('http://localhost:8000/api/favorites', options)
+      .then(response => response.json())
+      .then(response => {
+        console.log(response);
+        this.likedRecipes[id] = !this.likedRecipes[id]; // toggle the state
+        localStorage.setItem('likedRecipes', JSON.stringify(this.likedRecipes)); // save the state
+      })
+      .catch(err => console.error(err));
+  }
+
 
   goBack() {
     this.hideRecipeInformation = true;
