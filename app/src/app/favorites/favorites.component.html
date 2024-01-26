@@ -1,5 +1,8 @@
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
 </head>
 <div class="container">
   <div class="row">
@@ -7,15 +10,37 @@
       <h1>Favorites</h1>
       <div class="row" *ngIf="hideRecipeInformation">
         @for (favorite_recipe of favorite_recipes; track favorite_recipe.id) {
-        <div class="card" style="width: 18rem; margin: 10px;">
-          <img src="{{favorite_recipe.image}}" class="card-img-top" alt="{{favorite_recipe.title}}">
+        <div class="card" style="width: 18rem; margin: 10px">
+          <img
+            src="{{ favorite_recipe.image }}"
+            class="card-img-top"
+            alt="{{ favorite_recipe.title }}"
+          />
           <div class="card-body">
-            <h5 class="card-title">{{favorite_recipe.title}}</h5>
-            <button (click)="getRecipe(favorite_recipe.id)" class="btn btn-primary">Let's cook!</button>
-            <button (click)="addFavorite(favorite_recipe.id)" class="btn btn-primary m-1">
-              <i *ngIf="likedRecipes[favorite_recipe.id]" class="fa-solid fa-heart"></i>
-              <i *ngIf="!likedRecipes[favorite_recipe.id]" class="fa-regular fa-heart"></i>
-            </button>
+            <div class="card-title">
+              <h5 class="card-title">{{ favorite_recipe.title }}</h5>
+            </div>
+            <div class="card-btn">
+              <button
+                (click)="getRecipe(favorite_recipe.id)"
+                class="btn btn-primary"
+              >
+                Let's cook!
+              </button>
+              <button
+                (click)="addFavorite(favorite_recipe.id)"
+                class="btn btn-primary m-1"
+              >
+                <i
+                  *ngIf="likedRecipes[favorite_recipe.id]"
+                  class="fa-solid fa-heart"
+                ></i>
+                <i
+                  *ngIf="!likedRecipes[favorite_recipe.id]"
+                  class="fa-regular fa-heart"
+                ></i>
+              </button>
+            </div>
           </div>
         </div>
         } @empty {
@@ -43,3 +68,6 @@
         <h3>Not able to display results, please contact support</h3>
         }
       </div>
+    </div>
+  </div>
+</div>
