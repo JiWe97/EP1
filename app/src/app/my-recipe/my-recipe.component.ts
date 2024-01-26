@@ -24,6 +24,7 @@ export class MyRecipeComponent {
   search: any;
   showSearchInformation: boolean = true;
   showAddRecipe: boolean = false;
+  showSearchResults: boolean = false;
 
   constructor(private toastr: ToastrService) { }
 
@@ -48,7 +49,7 @@ export class MyRecipeComponent {
   goBack() {
     this.showSearchInformation = true;
     this.showAddRecipe = false;
-    this.postRecipe();
+    this.showSearchResults = false;
   }
 
   // Displaying added recipes
@@ -117,6 +118,9 @@ export class MyRecipeComponent {
 
   // Search through recipes in API based on title
   searchRecipe() {
+    this.showSearchInformation = false;
+    this.showAddRecipe = false;
+    this.showSearchResults = true;
     fetch(this.url)
       .then(response => response.json())
       .then(json => {
