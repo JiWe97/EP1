@@ -43,15 +43,28 @@ export class LoginComponent {
   }
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
-  }
+  //   const passwordInput = document.getElementById('password');
+  //   const toggleIcon = document.querySelector('.toggle-password');
+  //   if (passwordInput.type === 'password') {
+  //     passwordInput.type = 'text';
+  //     toggleIcon.classList.remove('fa-eye');
+  //     toggleIcon.classList.add('fa-eye-slash');
+  //   } else {
+  //     passwordInput.type = 'password';
+  //     toggleIcon.classList.remove('fa-eye-slash');
+  //     toggleIcon.classList.add('fa-eye');
+  //   }
+  // }
   
 // logout method
-	logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userName');
-    console.log('Logged out successfully');
-    this.toastr.success('Donut pho-get about us, we will miss you', '', {
-      positionClass: 'toast-bottom-right'
-    });
-    }
+	// logout() {
+  //   localStorage.removeItem('token');
+  //   localStorage.removeItem('userName');
+  //   console.log('Logged out successfully');
+  //   this.toastr.success('Donut pho-get about us, we will miss you', '', {
+  //     positionClass: 'toast-bottom-right'
+  //   });
+  //   }
+
+  }
 }
