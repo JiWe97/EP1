@@ -1,5 +1,8 @@
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
 </head>
 <div class="container">
   <div class="row">
@@ -7,13 +10,22 @@
       <div class="search" *ngIf="hideRecipeInformation">
         <h1>What do you want to eat?</h1>
         <!-- Dietary options -->
-        <input type="text" class="form-control m-1 searchA" [(ngModel)]="mySearch"
-          placeholder="I would like to eat..." />
+        <input
+          type="text"
+          class="form-control m-1 searchA"
+          [(ngModel)]="mySearch"
+          placeholder="I would like to eat..."
+        />
         <div class="row-md-12 form-block">
           <div class="form-floating m-1">
-            <select class="form-select searchB" id="floatingSelect"
-              [(ngModel)]="myDiet">
-              <option value="" selected disabled>Do you follow a special diet?</option>
+            <select
+              class="form-select searchB"
+              id="floatingSelect"
+              [(ngModel)]="myDiet"
+            >
+              <option value="" selected disabled>
+                Do you follow a special diet?
+              </option>
               <option value="none">None</option>
               <option value="vegetarian">Vegetarian</option>
               <option value="vegan">Vegan</option>
@@ -27,9 +39,14 @@
           </div>
           <!-- Options in cuisine -->
           <div class="form-floating m-1">
-            <select class="form-select searchC" id="floatingSelect"
-              [(ngModel)]="myCuisine">
-              <option value="" selected disabled>What cuisine do you like?</option>
+            <select
+              class="form-select searchC"
+              id="floatingSelect"
+              [(ngModel)]="myCuisine"
+            >
+              <option value="" selected disabled>
+                What cuisine do you like?
+              </option>
               <option id="none">None</option>
               <option id="african">African</option>
               <option id="asian">Asian</option>
@@ -57,14 +74,36 @@
           <div class="row">
             @for (element of this.search; track element.id) {
             <div class="card" style="width: 18rem; margin: 10px">
-              <img src="{{ element.image }}" class="card-img-top" alt="{{ element.title }}" />
+              <img
+                src="{{ element.image }}"
+                class="card-img-top"
+                alt="{{ element.title }}"
+              />
               <div class="card-body">
-                <h5 class="card-title">{{ element.title }}</h5>
-                <button (click)="getRecipe(element.id)" class="btn btn-primary m-1">Let's cook!</button>
-                <button (click)="addFavorite(element.id)" class="btn btn-primary m-1">
-                  <i *ngIf="likedRecipes[element.id]" class="fa-solid fa-heart"></i>
-                  <i *ngIf="!likedRecipes[element.id]" class="fa-regular fa-heart"></i>
-                 </button>
+                <div>
+                  <h5 class="card-title">{{ element.title }}</h5>
+                </div>
+                <div class="card-btn">
+                  <button
+                    (click)="getRecipe(element.id)"
+                    class="btn btn-primary m-1"
+                  >
+                    Let's cook!
+                  </button>
+                  <button
+                    (click)="addFavorite(element.id)"
+                    class="btn btn-primary m-1"
+                  >
+                    <i
+                      *ngIf="likedRecipes[element.id]"
+                      class="fa-solid fa-heart"
+                    ></i>
+                    <i
+                      *ngIf="!likedRecipes[element.id]"
+                      class="fa-regular fa-heart"
+                    ></i>
+                  </button>
+                </div>
               </div>
             </div>
             } @empty { No recipes found }
@@ -97,3 +136,6 @@
       </div>
 
       <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
