@@ -3,7 +3,6 @@
 
 .col-md-12{
   background-color: rgba(245, 245, 220, 0.453);
-
   padding: 5px;
   border-radius:0px 0px 20px 20px;
   width: 100%;
@@ -15,7 +14,6 @@
 /* Navbar */
 .navbar {
     margin-bottom: 5px;
-    
 }
 .nav-item {
     font-family: "Cormorant Garamond";
@@ -25,7 +23,7 @@
 }
 /* When hover on nav item, change color */
 .nav-item a:hover {
-    background-color: #9dccbb;
+    background-color: #638889ad;
     border-radius: 5px;
 }
 
@@ -33,10 +31,11 @@
   font-family: "Cormorant Garamond";
   font-size: 30px;
   margin-top: 60px;
+  color: #000000A6;
 }
 
 .btn:hover {
-  background-color: #9dccbb;
+  background-color: #638889ad;
   border-radius: 5px;
 }
 
