@@ -82,7 +82,7 @@ export class FavoritesComponent {
   }
 
   addFavorite(id: any) {
-    this.toastr.success('Pear-fect, you have added this recipe to your favorites', '', {
+    this.toastr.success('Spec-taco-lar, you have added this recipe to your favorites!', '', {
     })
     console.log(id);
     const token = localStorage.getItem('token');

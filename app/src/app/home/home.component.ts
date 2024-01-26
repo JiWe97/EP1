@@ -34,10 +34,10 @@ export class HomeComponent {
   userId: any;
   recipeId: string = '';
   likedRecipes: { [key: string]: boolean } = {};
-  // apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8'; /* /  Key Jill*/
+  apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8'; /* /  Key Jill*/
   // apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
   // apiKey: string = 'apiKey=396ee1bd3a5849709f010c5c693ea80e'; /*  Key Jill2  */
-  apiKey: string = 'apiKey=2e956ecadaf540638938a49e14e44ee6'; /*  Key Jill3  */
+  //apiKey: string = 'apiKey=2e956ecadaf540638938a49e14e44ee6'; /*  Key Jill3  */
   apiHost: string = 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
 
   constructor(private toastr: ToastrService) { }

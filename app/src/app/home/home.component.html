@@ -9,9 +9,7 @@
     <div class="col-md-12 input-field">
       <div class="search" *ngIf="hideRecipeInformation">
         @if (isLoggedIn()) {
-        <h1 *ngIf="isLoggedIn()">
-          Hi {{ getUsername() }},what do you want to eat?
-        </h1>
+        <h1 *ngIf="isLoggedIn()">Hi {{ getUsername() }}, what do you want to eat?</h1>
         } @else {
         <h1>What do you want to eat?</h1>
         }
@@ -23,15 +21,9 @@
           placeholder="I would like to eat..."
         />
         <div class="row-md-12 form-block">
-          <div class="form-floating m-1">
-            <select
-              class="form-select searchB"
-              id="floatingSelect"
-              [(ngModel)]="myDiet"
-            >
-              <option value="" selected disabled>
-                Do you follow a special diet?
-              </option>
+          <div class="form-floating m-1 floatingSelect">
+            <select class="form-select searchB" id="floatingSelect" [(ngModel)]="myDiet">
+              <option value="" disabled>Do you follow a special diet?</option>
               <option value="none">None</option>
               <option value="vegetarian">Vegetarian</option>
               <option value="vegan">Vegan</option>
@@ -42,17 +34,12 @@
               <option value="paleo">Paleo</option>
               <option value="ketogenic">Ketogenic</option>
             </select>
+            <label for="floatingSelect">Do you follow a special diet?</label>
           </div>
           <!-- Options in cuisine -->
           <div class="form-floating m-1">
-            <select
-              class="form-select searchC"
-              id="floatingSelect"
-              [(ngModel)]="myCuisine"
-            >
-              <option value="" selected disabled>
-                What cuisine do you like?
-              </option>
+            <select class="form-select searchC" id="floatingSelect" [(ngModel)]="myCuisine">
+              <option value="" selected disabled>What cuisine do you like?</option>
               <option id="none">None</option>
               <option id="african">African</option>
               <option id="asian">Asian</option>
