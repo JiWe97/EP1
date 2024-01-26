@@ -2,11 +2,12 @@
     <div class="row">
         <div class="col-md-12">
           @if (recipes) {
-            <h3>My recipes</h3>
+            <h1>My recipes</h1>
           } @else {
             <h5>You don't have any recipes yet</h5>
           }
-          <button (click)="addRecipe()" class="btn btn-primary m-1">Add Recipe</button>
+        <div class="searchInformation">
+          <!-- <button (click)="addRecipe()" class="btn btn-primary m-1">Add Recipe</button> -->
           <input type="text" [(ngModel)]="mySearch" placeholder="Search recipes" class="form-control">
                 <button (click)="searchRecipe()" class="btn btn-primary m-1">Search</button>
             <div class="ownRecipes">
@@ -19,16 +20,17 @@
                         <h5 class="card-title">{{recipe.title}}</h5>
                         <p class="card-text">{{recipe.ingredient}}</p>
                         <p class="card-text">{{recipe.step}}</p>
-                        <a href="#" class="btn btn-primary">Let's Cook!</a>
+                        <button class="btn btn-primary">Let's Cook!</button>
                       </div>
                     </div>
                   </div>
                 </div>
               } @empty {
-                You don't have any recipes yet.
+                <h3>You don't have any recipes yet.</h3>
               }
             </div>
-            <div class="addRecipes">
+          </div>
+            <div class="addRecipes" >
                 <form>
                     <div class="form-group">
                         <label for="title">Title</label>
@@ -43,7 +45,7 @@
                             <input type="text" class="form-control" [(ngModel)]="step" name="steps">
                     </div>
                 </form>
-                <button (click)="addRecipe()" class="btn btn-primary">Add Recipe</button>
+                <button (click)="submit()" class="btn btn-primary">Add Recipe</button>
             </div>
         </div>
     </div>
