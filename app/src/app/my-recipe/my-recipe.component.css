@@ -16,6 +16,7 @@ h1 {
     background-color: #638889;
     border: none;
   }
+
   .btn:hover {
     background-color: #638889ad;
   }
@@ -27,6 +28,9 @@ h1 {
     background-color: rgba(245, 245, 220, 0.453);
     width: 100%;
     margin: 10px;
+  }
+  textarea {
+    background-color: rgba(245, 245, 220, 0.453);
   }
 
   .text-center {

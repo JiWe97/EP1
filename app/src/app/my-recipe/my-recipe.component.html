@@ -1,55 +1,62 @@
 <div class="container">
-    <div class="row">
-        <div class="col-md-12">
-          @if (recipes) {
-            <h1>My recipes</h1>
-          } @else {
-            <h5>You don't have any recipes yet</h5>
-          }
-        <div class="searchInformation">
-          <!-- <button (click)="addRecipe()" class="btn btn-primary m-1">Add Recipe</button> -->
-          <input type="text" [(ngModel)]="mySearch" placeholder="Search recipes" class="form-control">
-                <button (click)="searchRecipe()" class="btn btn-primary m-1">Search</button>
-            <div class="ownRecipes">
-              <div class="row">
-              @for (recipe of recipe; track recipe.id) {
-                <div class="row">
-                  <div class="col-sm-6 mb-3 mb-sm-0 w-100">
-                    <div class="card">
-                      <div class="card-body">
-                        <h5 class="card-title">{{recipe.title}}</h5>
-                        <p class="card-text">{{recipe.ingredient}}</p>
-                        <p class="card-text">{{recipe.step}}</p>
-                        <button class="btn btn-primary">Let's Cook!</button>
-                      </div>
-                    </div>
+  <div class="row">
+    <div class="buttons">
+      @if (showAddRecipe) {
+        <button (click)="goBack()" class="btn btn-primary">Go back</button>
+      } @else {
+      <button (click)="plus()" class="btn btn-primary m-1"> <i class="fa-solid fa-plus"></i></button>
+      }
+    </div>
+    <div class="col-md-12">
+      <h1>My recipes</h1>
+      <div class="searchInformation" *ngIf="showSearchInformation">
+        <input type="text" [(ngModel)]="mySearch" placeholder="Search recipes" class="form-control">
+        <button (click)="searchRecipe()" class="btn btn-primary m-1 w-100">Search</button>
+        <div class="ownRecipes">
+          <div class="row">
+            @for (recipe of recipe; track recipe.id) {
+            <div class="row">
+              <div class="col-sm-6 mb-3 mb-sm-0 w-100">
+                <div class="card">
+                  <div class="card-body">
+                    <h5 class="card-title">{{recipe.title}}</h5>
+                    <p class="card-text">{{recipe.ingredient}}</p>
+                    <p class="card-text">{{recipe.step}}</p>
+                    <button (click)= "deleteRecipe(recipe.id)" class="btn btn-primary"> <i class="fa-solid fa-trash"></i></button>
                   </div>
                 </div>
-              } @empty {
-                <h3>You don't have any recipes yet.</h3>
-              }
+              </div>
             </div>
+            } @empty {
+            <h3>You don't have any recipes yet.</h3>
+            }
           </div>
-            <div class="addRecipes" >
-                <form>
-                    <div class="form-group">
-                        <label for="title">Title</label>
-                        <input type="text" class="form-control" id="title" name="title" [(ngModel)]="title">
-                    </div>
-                    <div class="form-group">
-                      <label for="ingredients">Ingredients</label>
-                          <input type="text" class="form-control" [(ngModel)]="ingredient" name="ingredients">
-                      </div>
-                    <div class="form-group">
-                        <label for="steps">Steps</label>
-                            <input type="text" class="form-control" [(ngModel)]="step" name="steps">
-                    </div>
-                </form>
-                <button (click)="submit()" class="btn btn-primary">Add Recipe</button>
-            </div>
         </div>
+      </div>
+      <div class="addRecipes" *ngIf="showAddRecipe">
+        <!-- <button (click)="goBack()" class="btn btn-primary">Go back</button> -->
+        <form>
+          <div class="form-group">
+            <label for="title">Title</label>
+            <input type="text" class="form-control" id="title" name="title" [(ngModel)]="title">
+          </div>
+          <div class="mb-1">
+            <label for="ingredients" class="form-label">Ingredients</label>
+            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="ingredient" name="ingredients"></textarea>
+          </div>
+          <div class="mb-1">
+            <label for="steps" class="form-label">Steps</label>
+            <textarea class="form-control" id="steps" rows="3" [(ngModel)]="step" name="step"></textarea>
+          </div>
+        </form>
+        <button (click)="submit()" class="btn btn-primary mt-2">Add Recipe</button>
+      </div>
     </div>
-    <!-- <div class="form-group">
+
+
+
+    <!-- To add multiple ingredients in an array instead of string
+      <div class="form-group">
       <label for="ingredients">Ingredients</label>
       @for (field of fieldsArray; track $index) {
         <div>
@@ -60,8 +67,7 @@
       </div> -->
 
 
-
-     <!-- When recipes are public
+    <!-- When recipes are public
        <div class="searchResults">
         <div class="row">
         @for (element of recipes; track element.id) {
@@ -80,4 +86,4 @@
         } @empty {
           You don't have any recipes yet.
         } -->
-</div>
+  </div>
