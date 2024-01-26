@@ -21,8 +21,10 @@ fieldsArray = ['', ''];
 recipe: any;
 mySearch: string = '';
 search: any;
-/* showAddRecipe: boolean = true;
-showSearchRecipe: boolean = false; */
+/* hideSearchInformation: boolean = true;
+hideRecipeInformation: boolean = false; */
+
+
 constructor(private toastr: ToastrService) { }
 
 getToken() {
@@ -35,9 +37,8 @@ getToken() {
   }
 }
 
-  addRecipe() {
+  submit() {
     this.toastr.success('Berry nice, you have added this recipe to your collection.', '', {
-      
     })
     const token = localStorage.getItem('token');
     const options = {
@@ -49,7 +50,6 @@ getToken() {
           "step": this.step,
           "user_id": token
     })
-    
      };
      console.log('Options before fetch: '+JSON.stringify(options));
       fetch(this.url, options)
@@ -62,6 +62,10 @@ getToken() {
       })
       .catch(err => console.error(err));
   } 
+
+  addRecipe() {
+    
+  }
 
   searchRecipe() {
     fetch(this.url)
@@ -78,8 +82,8 @@ getToken() {
       .catch(err => console.error(err));
   }
 
+  // Displaying added recipes
   postRecipe() {
-   
     const token = localStorage.getItem('token');
     fetch(this.url)
     .then(response => response.json())
@@ -94,6 +98,13 @@ getToken() {
     })
     .catch(err => console.error(err));
   }
+
+  // Display recipe information
+  /* getRecipe(id: any) {
+    this.hideSearchInformation = false;
+    this.hideRecipeInformation = true;
+
+  } */
 
 
 
