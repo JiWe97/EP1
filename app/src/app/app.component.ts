@@ -40,7 +40,7 @@ export class AppComponent {
     localStorage.removeItem('token');
     localStorage.removeItem('userName');
     console.log('Logged out successfully');
-    this.toastr.success('Donut pho-get about us, we will miss you', '', {
+    this.toastr.success('We will tira-miss you', '', {
       positionClass: 'toast-bottom-right'
     });
     }

@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
 
+
 @Component({
   selector: 'app-my-recipe',
   standalone: true,
@@ -47,6 +48,7 @@ export class MyRecipeComponent {
   goBack() {
     this.showSearchInformation = true;
     this.showAddRecipe = false;
+    this.postRecipe();
   }
 
   // Displaying added recipes
@@ -67,16 +69,18 @@ export class MyRecipeComponent {
   }
 
   deleteRecipe (id: any) {
-    const token = localStorage.getItem('token');
+    this.toastr.success('Your recipe has bean deleted', '', {
+    })
+    this.postRecipe();
     const options = {
-      method: 'DELETE',
-      headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.6.0' },
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.3.0' }
     };
-    fetch(this.url + '/' + id, options)
+    fetch(this.url + '/delete/' + id, options)
       .then(response => response.json())
-      .then(json => {
-        console.log(json);
-        this.postRecipe();
+      .then(response => {
+        console.log(response);
+        
       })
       .catch(err => console.error(err));
   }
