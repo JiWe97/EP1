@@ -4,10 +4,10 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12">
-        <h1>Favorites</h1>
-  <div class="row" *ngIf="hideRecipeInformation">
-      @for (favorite_recipe of favorite_recipes; track favorite_recipe.id) {
-        <div class="card" style="width: 18rem; margin: 10px;" >
+      <h1>Favorites</h1>
+      <div class="row" *ngIf="hideRecipeInformation">
+        @for (favorite_recipe of favorite_recipes; track favorite_recipe.id) {
+        <div class="card" style="width: 18rem; margin: 10px;">
           <img src="{{favorite_recipe.image}}" class="card-img-top" alt="{{favorite_recipe.title}}">
           <div class="card-body">
             <h5 class="card-title">{{favorite_recipe.title}}</h5>
@@ -15,14 +15,14 @@
             <button (click)="addFavorite(favorite_recipe.id)" class="btn btn-primary m-1">
               <i *ngIf="likedRecipes[favorite_recipe.id]" class="fa-solid fa-heart"></i>
               <i *ngIf="!likedRecipes[favorite_recipe.id]" class="fa-regular fa-heart"></i>
-             </button>
+            </button>
           </div>
         </div>
-      } @empty {
+        } @empty {
         <h3>You don't have any favorites yet.</h3>
-      } 
-  </div>
-  <div class="recipeInformation" *ngIf="hideSearchInformation">
+        }
+      </div>
+      <div class="recipeInformation" *ngIf="hideSearchInformation">
         <button (click)="goBack()" class="btn btn-primary">Back</button>
         @if (results) {
         <h3>{{ results.title }}</h3>
@@ -42,7 +42,4 @@
         } @else {
         <h3>Not able to display results, please contact support</h3>
         }
-  </div>
-
-
-  
+      </div>
