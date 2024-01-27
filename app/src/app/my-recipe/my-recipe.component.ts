@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ToastrService } from 'ngx-toastr';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -19,14 +20,14 @@ export class MyRecipeComponent {
   userId: string = '';
   recipes: any[] = [];
   fieldsArray = ['', ''];
-  recipe: any;
+  myRecipes: any[] = [];
   mySearch: string = '';
   search: any;
   showSearchInformation: boolean = true;
   showAddRecipe: boolean = false;
   showSearchResults: boolean = false;
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService,private router: Router) { }
 
   // Retrieve user_id from local storage
   getToken() {
@@ -50,6 +51,7 @@ export class MyRecipeComponent {
     this.showSearchInformation = true;
     this.showAddRecipe = false;
     this.showSearchResults = false;
+    this.postRecipe();
   }
 
   // Displaying added recipes
@@ -59,9 +61,9 @@ export class MyRecipeComponent {
       .then(response => response.json())
       .then(json => {
         this.recipes = json;
-        this.recipe = this.recipes.filter(recipe => recipe.user_id === Number(token));
-        if (this.recipe) {
-          console.log('Recipes:', this.recipe);
+        this.myRecipes = this.recipes.filter(recipe => recipe.user_id === Number(token));
+        if (this.myRecipes) {
+          console.log('Recipes:', this.myRecipes);
         } else {
           console.log('No recipes found');
         }
@@ -70,18 +72,17 @@ export class MyRecipeComponent {
   }
 
   deleteRecipe (id: any) {
-    this.toastr.success('Your recipe has bean deleted', '', {
-    })
-    this.postRecipe();
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.3.0' }
     };
     fetch(this.url + '/delete/' + id, options)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-        
+    // TODO: Dit nog vragen aan Massimo
+      // .then(response => response.json())
+      // .then(response => console.log(response))
+      .then(() => {
+        this.toastr.success('Your recipe has bean deleted', '', {})
+        this.myRecipes = this.myRecipes.filter(recipe => recipe.id !== id);
       })
       .catch(err => console.error(err));
   }

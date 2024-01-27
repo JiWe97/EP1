@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrService } from 'ngx-toastr';
 
@@ -123,25 +122,26 @@ export class HomeComponent {
     this.hideSearchInformation = false;
   }
 
-  addFavorite(id: any) {
-    this.toastr.success('Pear-fect, you have added this recipe to your favorites', '', {
-    })
+  addOrRemoveFavorite(id: any) {
     console.log(id);
     const token = localStorage.getItem('token');
+    const isFavorite = this.likedRecipes[id];
+    const method = isFavorite ? 'DELETE' : 'POST'; // Toggle method based on current state
     const options = {
-      method: 'POST',
+      method: method,
       headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1' },
       body: JSON.stringify({
-        "user_id": token, // it needs to be retrieved from the localstorage
+        "user_id": token, // Retrieved from localstorage
         "recipe_id": id
       })
     }
-    fetch('http://localhost:8000/api/favorites', options)
+    const url = `http://localhost:8000/api/favorites/` + id; // Adjust URL for add/remove
+    fetch(url, options)
       .then(response => response.json())
       .then(response => {
         console.log(response);
-        this.likedRecipes[id] = !this.likedRecipes[id]; // toggle the state
-        localStorage.setItem('likedRecipes', JSON.stringify(this.likedRecipes)); // save the state
+        this.likedRecipes[id] = !isFavorite; // Toggle the state
+        // No need to save to localStorage, rely on server state
       })
       .catch(err => console.error(err));
   }
