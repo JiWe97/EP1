@@ -40,6 +40,40 @@ select {
   background-color: transparent;
   border: none;
 }
+/* recipe information */
+* {
+  box-sizing: border-box;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-item-left {
+  padding: 10px;
+  flex: 0 0 300px; /* Flex grow is 0, flex shrink is 0, and the base width is 100px */
+}
+
+.flex-item-right {
+  padding: 10px;
+  flex: 1; /* Flex grow is 1, flex shrink is 1, flex-basis is 0% (default) */
+}
+
+.flex-item-right img {
+  width: 100%;
+}
+
+/* Responsive layout - makes a one column-layout instead of a two-column layout */
+@media (max-width: 800px) {
+  .flex-item-right, .flex-item-left {
+    flex: 100%;
+  }
+  
+  .flex-item-right {
+    order: -1;;
+  }
+}
 
 /*card*/
 .card {

@@ -11,7 +11,7 @@ import { ToastrService } from 'ngx-toastr';
   imports: [CommonModule, RouterOutlet, FormsModule, ReactiveFormsModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css',
-  
+
 })
 export class AppComponent {
   constructor(private toastr: ToastrService) { }
@@ -37,11 +37,11 @@ export class AppComponent {
     }
   }
   logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userName');
+    localStorage.clear();
     console.log('Logged out successfully');
     this.toastr.success('We will tira-miss you', '', {
       positionClass: 'toast-bottom-right'
     });
-    }
+    window.location.reload();
+  }
 }

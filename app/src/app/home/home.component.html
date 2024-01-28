@@ -59,7 +59,7 @@
           }
           <div class="row">
             @for (element of this.search; track element.id) {
-            <div class="card" style="width: 18rem; margin: 10px">
+            <div class="card" style="width: 18rem; margin: 10px" (click)="getRecipe(element.id)">
               <img src="{{ element.image }}" class="card-img-top" alt="{{ element.title }}" />
               <div class="card-body">
                 <div>
@@ -69,7 +69,7 @@
                   <button (click)="getRecipe(element.id)" class="btn btn-primary m-1">
                     Let's cook!
                   </button>
-                  <button (click)="addOrRemoveFavorite(element.id)" class="btn btn-primary m-1">
+                  <button *ngIf="isLoggedIn()" (click)="addOrRemoveFavorite(element.id)" class="btn btn-primary m-1">
                     <i *ngIf="likedRecipes[element.id]" class="fa-solid fa-heart"></i>
                     <i *ngIf="!likedRecipes[element.id]" class="fa-regular fa-heart"></i>
                   </button>
@@ -86,20 +86,32 @@
           <i class="fa-regular fa-heart"></i>
         </button>
         @if (results) {
-        <h3>{{ results.title }}</h3>
-        <img src="{{ results.image }}" alt="{{ results.title }}" />
-        <p>Diets: {{ results.diets }}</p>
-        <p>Ready in {{ results.readyInMinutes }} minutes.</p>
-        <p>Serves {{ results.servings }} people</p>
-        <div class="ingredients">
-          <b>Ingredients</b>
-          @for (ingredient of results.extendedIngredients; track ingredient.id)
-          {
-          <li>{{ ingredient.original }}</li>
-          }
+        <h1>{{ results.title }}</h1>
+        <div class="flex-container">
+          <div class="flex-item-left">
+            <b>Ingredients</b>
+            @for (ingredient of results.extendedIngredients; track ingredient.id)
+            {
+            <li>{{ ingredient.original }}</li>
+            }
+          </div>
         </div>
-        <b>Instructions</b>
-        <p [innerHTML]="results.instructions"></p>
+        <div class="flex-item-right">
+          <div class="img">
+            <img src="{{ results.image }}" alt="{{ results.title }}"
+              style="border-radius: 20px; width: 400px; height: auto;" />
+          </div>
+        </div>
+        <div class="details" style="display: flex;">
+          <b>Details</b>
+          <p> Diets: {{ results.diets }}</p>
+          <p>Ready in {{ results.readyInMinutes }} minutes.</p>
+          <p>Serves {{ results.servings }} people</p>
+        </div>
+        <div class="instructions">
+          <b>Instructions</b>
+          <p [innerHTML]="results.instructions"></p>
+        </div>
         } @else {
         <h3>Not able to display results, please contact support</h3>
         }
