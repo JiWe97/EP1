@@ -1,56 +1,62 @@
-
 h1 {
-    font-size: 50px;
-    font-family: "Cormorant Garamond";
-    text-align: center;
-    border-bottom: 3px double black;
-  }
-  h3 {
-    font-size: 30px;
-    font-family: "Cormorant Garamond";
-  }
-  
-  .btn {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 15px;
-    background-color: #638889;
-    border: none;
-  }
+  font-size: 50px;
+  font-family: "Cormorant Garamond";
+  text-align: center;
+  border-bottom: 3px double black;
+}
 
-  .btn:hover {
-    background-color: #638889ad;
-  }
-  input {
-    background-color: rgba(245, 245, 220, 0.453);
-    text-align: center;
-  }
-  select {
-    background-color: rgba(245, 245, 220, 0.453);
-    width: 100%;
-    margin: 10px;
-  }
-  textarea {
-    background-color: rgba(245, 245, 220, 0.453);
-  }
+h3 {
+  font-size: 30px;
+  font-family: "Cormorant Garamond";
+}
 
-  .text-center {
-    justify-content: center;
-  }
-  
-  .label {
-    background-color: transparent;
-    border: none;
-  }
-  /*card*/
-  .card {
-    padding: 10px;
-    background-color: beige;
-    margin-bottom: 2px;
-    width: 100%;
-  }
-  .card a:hover {
-    background-color: #9dccbb;
-  }
-  
+.btn {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  background-color: #638889;
+  border: none;
+}
 
-  
+.btn:hover {
+  background-color: #638889ad;
+}
+
+input {
+  background-color: rgba(245, 245, 220, 0.453);
+  text-align: center;
+}
+
+select {
+  background-color: rgba(245, 245, 220, 0.453);
+  width: 100%;
+  margin: 10px;
+}
+
+textarea {
+  background-color: rgba(245, 245, 220, 0.453);
+}
+
+.text-center {
+  justify-content: center;
+}
+
+.label {
+  background-color: transparent;
+  border: none;
+}
+
+/*card*/
+.card {
+  padding: 10px;
+  background-color: beige;
+  margin-bottom: 2px;
+  width: 100%;
+}
+
+.card a:hover {
+  background-color: #9dccbb;
+}
+
+.row {
+  justify-content: space-around;
+}

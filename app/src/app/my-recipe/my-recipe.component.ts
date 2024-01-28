@@ -19,7 +19,7 @@ export class MyRecipeComponent {
   step: string = '';
   userId: string = '';
   recipes: any[] = [];
-  fieldsArray = ['', ''];
+  /* fieldsArray = ['', '']; For the future */
   myRecipes: any[] = [];
   mySearch: string = '';
   search: any;
@@ -27,7 +27,7 @@ export class MyRecipeComponent {
   showAddRecipe: boolean = false;
   showSearchResults: boolean = false;
 
-  constructor(private toastr: ToastrService,private router: Router) { }
+  constructor(private toastr: ToastrService, private router: Router) { }
 
   // Retrieve user_id from local storage
   getToken() {
@@ -41,8 +41,9 @@ export class MyRecipeComponent {
   }
 
   // Show input fields to add recipe
-  plus() {
+  addRecipe() {
     this.showSearchInformation = false;
+    this.showSearchResults = false;
     this.showAddRecipe = true;
   }
 
@@ -71,25 +72,24 @@ export class MyRecipeComponent {
       .catch(err => console.error(err));
   }
 
-  deleteRecipe (id: any) {
+  deleteRecipe(id: any) {
     const options = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.3.0' }
     };
     fetch(this.url + '/delete/' + id, options)
-    // TODO: Dit nog vragen aan Massimo
+      // TODO: Dit nog vragen aan Massimo
       // .then(response => response.json())
       // .then(response => console.log(response))
       .then(() => {
-        this.toastr.success('Your recipe has bean deleted', '', {})
+        this.toastr.success('Your recipe has bean deleted', '', { positionClass: 'toast-bottom-right' })
         this.myRecipes = this.myRecipes.filter(recipe => recipe.id !== id);
       })
       .catch(err => console.error(err));
   }
   // Add recipe to database
   submit() {
-    this.toastr.success('Berry nice, you have added this recipe to your collection.', '', {
-    })
+    this.toastr.success('Berry nice, you have added this recipe to your collection.', '', { positionClass: 'toast-bottom-right' })
     const token = localStorage.getItem('token');
     const options = {
       method: 'POST',
@@ -117,8 +117,8 @@ export class MyRecipeComponent {
     this.step = '';
   }
 
-  // Search through recipes in API based on title
-  searchRecipe() {
+  // Search through own recipes in API based on title
+  searchForRecipe() {
     this.showSearchInformation = false;
     this.showAddRecipe = false;
     this.showSearchResults = true;
@@ -136,30 +136,21 @@ export class MyRecipeComponent {
       .catch(err => console.error(err));
   }
 
-  // Display recipe information
-  /* getRecipe(id: any) {
-    this.hideSearchInformation = false;
-    this.hideRecipeInformation = true;
-
-  } */
-
-
-
+  /* For the future */
   /* addField() {
       // Add a new field
       this.fieldsArray.push('');
     }
   
-    submitForm() {
-      // making use of the destructor again ;) yay
-      const values = [...this.fieldsArray];
-      console.log(values);
-  
-      // clear the fields;
-      this.fieldsArray = ['', ''];
-  
-      alert(values.join('\n'));
-    } */
+  submitForm() {
+    const values = [...this.fieldsArray];
+    console.log(values);
+ 
+    // clear the fields;
+    this.fieldsArray = ['', ''];
+ 
+    alert(values.join('\n'));
+  } */
 
   ngOnInit() {
     this.postRecipe();

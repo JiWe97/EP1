@@ -5,6 +5,12 @@ h1 {
   border-bottom: 3px double black;
 }
 
+@media screen and (max-width: 450px) {
+  h1 {
+    font-size: calc(1rem + 2vw);
+  }
+}
+
 .btn {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 15px;
@@ -26,13 +32,38 @@ select {
   text-align: center;
 }
 
+/* Width and position of form */
+
 .form-block {
   display: flex;
+  flex-direction: row;
+  flex-basis: 100%;
+  flex: 1;
   justify-content: center;
+}
+
+@media screen and (max-width: 450px) {
+  .form-block {
+    flex-direction: column;
+  }
 }
 
 .form-floating {
   width: 100%;
+  display: flex;
+}
+
+.form-floating>.form-select {
+  padding-top: 2rem;
+  padding-bottom: 0.625rem;
+}
+
+.form-floating>.form-control,
+.form-floating>.form-control-plaintext,
+.form-floating>.form-select {
+  height: calc(4.5rem + calc(var(--bs-border-width) * 2));
+  min-height: calc(4.5rem + calc(var(--bs-border-width) * 2));
+  line-height: 1.25;
 }
 
 .text-center {
@@ -56,22 +87,27 @@ select {
 
 .flex-item-left {
   padding: 10px;
-  flex: 0 0 300px;
-  /* Flex grow is 0, flex shrink is 0, and the base width is 100px */
+  flex: 2 1 auto;
+  /* Flex grow is 0, flex shrink is 0, and the base width is 300px */
 }
 
 .flex-item-right {
   padding: 10px;
-  flex: 1;
+  flex: 1 2 auto;
   /* Flex grow is 1, flex shrink is 1, flex-basis is 0% (default) */
 }
 
 .flex-item-right img {
   width: 100%;
+  max-width: (300px);
+}
+
+.flex-item-other {
+  flex: 0 0 100%;
 }
 
 /* Responsive layout - makes a one column-layout instead of a two-column layout */
-@media (max-width: 800px) {
+@media (max-width: 992px) {
 
   .flex-item-right,
   .flex-item-left {
@@ -82,6 +118,7 @@ select {
     order: -1;
     ;
   }
+
 }
 
 /*card*/
@@ -92,8 +129,8 @@ select {
   background-color: beige;
 }
 
-.card a:hover {
-  background-color: #9dccbb;
+.card:hover {
+  background-color: rgba(245, 245, 220, 0.453);
 }
 
 .card-btn {
@@ -101,4 +138,14 @@ select {
   bottom: 0;
   left: 0;
   margin: 10px;
+}
+
+.card-title {
+  margin: 0;
+}
+
+.recipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: space-evenly;
 }

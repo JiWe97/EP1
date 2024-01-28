@@ -1,8 +1,5 @@
 <head>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <div class="container">
   <div class="row">
@@ -11,39 +8,18 @@
       <div class="card my-5">
         <form class="card-body p-lg-5">
           <div class="mb-3">
-            <input
-              type="text"
-              class="form-control"
-              id="Username"
-              placeholder="User Name"
-              [(ngModel)]="userName"
-              name="userName"
-              required
-            />
+            <input type="text" class="form-control" id="Username" placeholder="User Name" [(ngModel)]="userName"
+              name="userName" required />
           </div>
           <div class="mb-3">
-            <input
-              type="{{ showPassword ? 'text' : 'password' }}"
-              class="form-control"
-              id="password"
-              placeholder="Password"
-              [(ngModel)]="password"
-              name="password"
-              required
-            />
-            <button
-              class="btn btn-dark mt-2"
-              (click)="togglePasswordVisibility()"
-            >
+            <input type="{{ showPassword ? 'text' : 'password' }}" class="form-control" id="password"
+              placeholder="Password" [(ngModel)]="password" name="password" required />
+            <button class="btn btn-dark mt-2" (click)="togglePasswordVisibility()">
               Show password
             </button>
           </div>
           <div class="text-center">
-            <button
-              type="submit"
-              class="btn btn-primary px-5 m-1 w-20"
-              (click)="onSubmit()"
-            >
+            <button type="submit" class="btn btn-primary px-5 m-1 w-20" (click)="onSubmit()">
               Login
             </button>
           </div>

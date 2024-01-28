@@ -1,75 +1,100 @@
-@import url('https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Nanum+Myeongjo&display=swap');
 h1 {
-    font-size: 50px;
-    font-family: "Cormorant Garamond";
-    text-align: center;
-    border-bottom: 3px double black;
+  font-size: 50px;
+  font-family: "Cormorant Garamond";
+  text-align: center;
+  border-bottom: 3px double black;
+}
+
+/* Font size for mobile */
+
+@media screen and (max-width: 450px) {
+  h1 {
+    font-size: calc(1rem + 2vw);
   }
-h3 {
-    font-size: 30px;
-    font-family: "Cormorant Garamond";
+}
+
+.btn {
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-size: 15px;
+  background-color: #638889;
+  border: none;
+}
+
+.btn:hover {
+  background-color: #638889ad;
+}
+
+/* Recipe layout */
+* {
+  box-sizing: border-box;
+}
+
+.flex-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.flex-item-left {
+  padding: 10px;
+  flex: 2 1 auto;
+  /* Flex grow is 0, flex shrink is 0, and the base width is 300px */
+}
+
+.flex-item-right {
+  padding: 10px;
+  flex: 1 2 auto;
+  /* Flex grow is 1, flex shrink is 1, flex-basis is 0% (default) */
+}
+
+.flex-item-right img {
+  width: 100%;
+  max-width: (300px);
+}
+
+.flex-item-other {
+  flex: 0 0 100%;
+}
+
+/* Responsive layout - makes a one column-layout instead of a two-column layout */
+@media (max-width: 992px) {
+
+  .flex-item-right,
+  .flex-item-left {
+    flex: 100%;
   }
-  
-  .btn {
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
-    font-size: 15px;
-    background-color: #638889;
-    border: none;
+
+  .flex-item-right {
+    order: -1;
+    ;
   }
-  .btn:hover {
-    background-color: #638889ad;
-  }
-  input {
-    background-color: rgba(245, 245, 220, 0.453);
-    text-align: center;
-  }
-  select {
-    background-color: rgba(245, 245, 220, 0.453);
-    width: 50%;
-    margin: 10px;
-  }
-  .text-center {
-    justify-content: center;
-  }
-  
-  .label {
-    background-color: transparent;
-    border: none;
-  }
-  /*card*/
-  .card {
-    padding: 10px;
+
+}
+
+/*card*/
+.card {
+  padding: 10px;
   width: 300px;
   height: 355px;
   background-color: beige;
-  }
-  .card a:hover {
-    background-color: #9dccbb;
-  }
+}
 
-  .card-btn {
-    position: absolute;
-      bottom: 0;
-      left: 0;
-      margin: 10px;
-  }
-  
-  /* Collapse */
-  .collapse {
-      &:not(.show) {
-        display: none;
-      }
-    }
-    
-    .collapsing {
-      height: 0;
-      overflow: hidden;
-      @include transition($transition-collapse);
-    
-      &.collapse-horizontal {
-        width: 0;
-        height: auto;
-        @include transition($transition-collapse-width);
-      }
-    }
-  
+.card:hover {
+  background-color: rgba(245, 245, 220, 0.453);
+}
+
+.card-btn {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  margin: 10px;
+}
+
+.card-title {
+  margin: 0;
+}
+
+.recipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  justify-content: space-evenly;
+}

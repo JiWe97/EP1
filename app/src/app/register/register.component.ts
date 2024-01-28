@@ -12,34 +12,34 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
-  firstName:string ='';
-  lastName:string='';
-  email:string='';
-  password:string='';
-  userName:string='';
+  firstName: string = '';
+  lastName: string = '';
+  email: string = '';
+  password: string = '';
+  userName: string = '';
   showPassword: boolean = false;
 
-  constructor(private userService: UserService, private router: Router, private toastr: ToastrService) {}
+  constructor(private userService: UserService, private router: Router, private toastr: ToastrService) { }
 
   onSubmit() {
     this.router.navigate(['/login']);
     const options = {
       method: 'POST',
-      headers: {'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.6.0'},
+      headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.6.0' },
       body: JSON.stringify({
-         "firstname": this.firstName,
-         "email": this.email,
-         "password": this.password,
-         "lastname": this.lastName,
-         "username": this.userName
+        "firstname": this.firstName,
+        "email": this.email,
+        "password": this.password,
+        "lastname": this.lastName,
+        "username": this.userName
       })
-     };
-    
+    };
+
     fetch('http://localhost:8000/api/users', options)
       .then(response => response.json())
       .then(response => console.log(response))
       .catch(err => console.error(err));
-      
+
     console.log('You have been registered:', {
       firstName: this.firstName,
       lastName: this.lastName,
@@ -54,14 +54,14 @@ export class RegisterComponent {
       positionClass: 'toast-bottom-right'
     });
     console.log('You have been registered'); // Log to console
-  
-      // clear the fields;
-      this.userName = '';
-      this.password = '';
-      this.firstName = '';
-      this.lastName = '';
-      this.email = '';
-      
+
+    // clear the fields;
+    this.userName = '';
+    this.password = '';
+    this.firstName = '';
+    this.lastName = '';
+    this.email = '';
+
   }
 
   togglePasswordVisibility(): void {

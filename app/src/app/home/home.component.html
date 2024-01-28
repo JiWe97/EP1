@@ -15,7 +15,7 @@
           placeholder="I would like to eat..." />
         <div class="row-md-12 form-block">
           <div class="form-floating m-1 floatingSelect">
-            <select class="form-select searchB" id="floatingSelect" [(ngModel)]="myDiet">
+            <select class="form-select searchB" [(ngModel)]="myDiet">
               <option value="" disabled>Do you follow a special diet?</option>
               <option value="none">None</option>
               <option value="vegetarian">Vegetarian</option>
@@ -30,8 +30,8 @@
             <label for="floatingSelect">Do you follow a special diet?</label>
           </div>
           <!-- Options in cuisine -->
-          <div class="form-floating m-1">
-            <select class="form-select searchC" id="floatingSelect" [(ngModel)]="myCuisine">
+          <div class="form-floating m-1 floatingSelect">
+            <select class="form-select searchC" [(ngModel)]="myCuisine">
               <option value="" selected disabled>What cuisine do you like?</option>
               <option id="none">None</option>
               <option id="african">African</option>
@@ -50,7 +50,7 @@
             <label for="floatingSelect">What cuisine do you like?</label>
           </div>
         </div>
-        <button (click)="getData()" class="btn btn-primary m-1">Search</button>
+        <button (click)="postSearchedRecipes()" class="btn btn-primary m-1">Search</button>
 
         <div class="searchResults">
           @if (mySearch) {
@@ -58,16 +58,17 @@
           } @else {
           <h3>Suggestions</h3>
           }
-          <div class="row">
+          <div class="recipes">
             @for (element of this.search; track element.id) {
-            <div class="card" style="width: 18rem; margin: 10px" (click)="getRecipe(element.id)">
-              <img src="{{ element.image }}" class="card-img-top" alt="{{ element.title }}" />
+            <div class="card" style="width: 18rem; margin: 10px">
+              <img (click)="getRecipeInformation(element.id)" src="{{ element.image }}" class="card-img-top"
+                alt="{{ element.title }}" />
               <div class="card-body">
-                <div>
+                <div (click)="getRecipeInformation(element.id)">
                   <h5 class="card-title">{{ element.title }}</h5>
                 </div>
                 <div class="card-btn">
-                  <button (click)="getRecipe(element.id)" class="btn btn-primary m-1">
+                  <button (click)="getRecipeInformation(element.id)" class="btn btn-primary m-1">
                     Let's cook!
                   </button>
                   <button *ngIf="isLoggedIn()" (click)="addOrRemoveFavorite(element.id)" class="btn btn-primary m-1">
@@ -83,8 +84,9 @@
       </div>
       <div class="recipeInformation" *ngIf="hideSearchInformation">
         <button (click)="goBack()" class="btn btn-primary">Back</button>
-        <button (click)="addOrRemoveFavorite(results.id)" class="btn btn-primary m-1">
-          <i class="fa-regular fa-heart"></i>
+        <button *ngIf="isLoggedIn()" (click)="addOrRemoveFavorite(results.id)" class="btn btn-primary m-1">
+          <i *ngIf="likedRecipes[results.id]" class="fa-solid fa-heart"></i>
+          <i *ngIf="!likedRecipes[results.id]" class="fa-regular fa-heart"></i>
         </button>
         @if (results) {
         <h1>{{ results.title }}</h1>
@@ -96,22 +98,19 @@
             <li>{{ ingredient.original }}</li>
             }
           </div>
-        </div>
-        <div class="flex-item-right">
-          <div class="img">
-            <img src="{{ results.image }}" alt="{{ results.title }}"
-              style="border-radius: 20px; width: 400px; height: auto;" />
+          <div class="flex-item-right">
+            <img src="{{ results.image }}" alt="{{ results.title }}" style="border-radius: 20px;" />
           </div>
-        </div>
-        <div class="details" style="display: flex;">
-          <b>Details</b>
-          <p> Diets: {{ results.diets }}</p>
-          <p>Ready in {{ results.readyInMinutes }} minutes.</p>
-          <p>Serves {{ results.servings }} people</p>
-        </div>
-        <div class="instructions">
-          <b>Instructions</b>
-          <p [innerHTML]="results.instructions"></p>
+          <div class="details flex-item-other">
+            <b>Details</b>
+            <p> Diets: {{ results.diets }}</p>
+            <p>Ready in {{ results.readyInMinutes }} minutes.</p>
+            <p>Serves {{ results.servings }} people</p>
+          </div>
+          <div class="instructions flex-item-other">
+            <b>Instructions</b>
+            <p [innerHTML]="results.instructions" style="text-align: justify;"></p>
+          </div>
         </div>
         } @else {
         <h3>Not able to display results, please contact support</h3>
