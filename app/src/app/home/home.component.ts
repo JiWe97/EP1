@@ -25,6 +25,7 @@ export class HomeComponent {
   i: any;
   id: any;
   element: any;
+  searchInput: string = '';
   mySearch: string = '';
   myDiet: string = '{{value}}';
   myCuisine: string = `{{id}}`;
@@ -73,11 +74,11 @@ export class HomeComponent {
   }
 
   getSuggestions() {
-    fetch(this.url + this.apiKey + '&query=' + this.mySearch)
+    fetch(this.url + this.apiKey + '&query=' + this.searchInput)
       .then(response => response.json())
       .then(json => {
         this.recipes = json.results;
-        this.search = this.recipes.filter(recipes => recipes.title.includes(this.mySearch));
+        this.search = this.recipes.filter(recipes => recipes.title.includes(this.searchInput));
         if (this.search) {
           console.log('Recipes:', this.search);
         } else {
@@ -88,13 +89,14 @@ export class HomeComponent {
   }
   /* Search through recipes in API based on user input */
   getData() {
+    this.mySearch = this.searchInput;
     this.hideRecipeInformation = true;
     this.hideSearchInformation = false;
-    fetch(this.url + this.apiKey + '&query=' + this.mySearch + '&diet=' + this.myDiet + '&cuisine=' + this.myCuisine)
+    fetch(this.url + this.apiKey + '&query=' + this.searchInput + '&diet=' + this.myDiet + '&cuisine=' + this.myCuisine)
       .then(response => response.json())
       .then(json => {
         this.recipes = json.results;
-        this.search = this.recipes.filter(recipes => recipes.title.includes(this.mySearch));
+        this.search = this.recipes.filter(recipes => recipes.title.includes(this.searchInput));
         if (this.search) {
           console.log('Recipes:', this.search);
         } else {

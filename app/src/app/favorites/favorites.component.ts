@@ -104,7 +104,7 @@ export class FavoritesComponent {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1' },
       }
-      
+
       fetch('http://localhost:8000/api/favorites/delete/' + this.likedRecipesId[id], options)
         .then(() => {
           this.likedRecipes[id] = false; // Toggle the state
