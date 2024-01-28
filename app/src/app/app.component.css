@@ -7,6 +7,7 @@
   border-radius:0px 0px 20px 20px;
   width: 100%;
 }
+/*Logo*/
 .logo {
     width: 145px;
     height: 130px;
@@ -39,6 +40,7 @@
   border-radius: 5px;
 }
 
+/* Responsive design */
   @media screen and (max-width: 600px) {
     .navbar {
         margin-bottom: 2px;
