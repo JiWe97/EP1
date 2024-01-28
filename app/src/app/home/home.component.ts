@@ -2,7 +2,6 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-import { AnyCatcher } from 'rxjs/internal/AnyCatcher';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ToastrService } from 'ngx-toastr';
 
@@ -31,12 +30,12 @@ export class HomeComponent {
   myCuisine: string = `{{id}}`;
   hideRecipeInformation: boolean = true;
   hideSearchInformation: boolean = false;
-  userId: any;
   recipeId: string = '';
   likedRecipes: { [key: string]: boolean } = {};
-  apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8'; /* /  Key Jill*/
+  likedRecipesId: { [key: string]: boolean } = {};
+  // apiKey: string = 'apiKey=a1bb1c31a31948c8b57d41dd27e57ee8'; /* /  Key Jill*/
   // apiKey: string = 'apiKey=8c32bde673c647bea5690466e6f0e444'; /* Key Vicki */
-  // apiKey: string = 'apiKey=396ee1bd3a5849709f010c5c693ea80e'; /*  Key Jill2  */
+  apiKey: string = 'apiKey=396ee1bd3a5849709f010c5c693ea80e'; /*  Key Jill2  */
   //apiKey: string = 'apiKey=2e956ecadaf540638938a49e14e44ee6'; /*  Key Jill3  */
   apiHost: string = 'spoonacular-recipe-food-nutrition-v1.p.rapidapi.com';
 
@@ -118,32 +117,77 @@ export class HomeComponent {
       .catch(err => console.error(err));
   }
 
+  // Getting the data of the favorite recipes
+  getFavorites() {
+    const token = localStorage.getItem('token');
+    fetch('http://localhost:8000/api/favorites')
+      .then(response => response.json())
+      .then(json => {
+        let querryResult: any[] = json;
+
+        // Keep only the favorite recipes from the user
+        querryResult = querryResult.filter(favorite => favorite.user_id === Number(token));
+
+        // Build a map of favorite recipes from the querry result
+        this.likedRecipes = querryResult.reduce(function (map, obj) {
+          map[obj.recipe_id] = true;
+          return map;
+        }, {});
+
+        this.likedRecipesId = querryResult.reduce(function (map, obj) {
+          map[obj.recipe_id] = obj.id;
+          return map;
+        }, {});
+      })
+      .catch(err => console.error(err));
+  }
+
   goBack() {
     this.hideRecipeInformation = true;
     this.hideSearchInformation = false;
   }
 
-  addFavorite(id: any) {
-    this.toastr.success('Pear-fect, you have added this recipe to your favorites', '', {
-    })
-    console.log(id);
+  addOrRemoveFavorite(id: any) {
     const token = localStorage.getItem('token');
-    const options = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1' },
-      body: JSON.stringify({
-        "user_id": token, // it needs to be retrieved from the localstorage
-        "recipe_id": id
-      })
+    const isFavorite = this.likedRecipes[id];
+
+    if (isFavorite) {
+      // Remove liked recipe
+      console.log("Removing from favorites " + id);
+      const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1' }
+      }
+      fetch('http://localhost:8000/api/favorites/delete/' + this.likedRecipesId[id], options)
+        .then(() => {
+          this.likedRecipes[id] = false; // Toggle the state
+          // No need to save to localStorage, rely on server state
+          this.toastr.success('Removed from favorites', '', {})
+        })
+        .catch(err => console.error(err));
+
+    } else {
+      // Add liked recipe to favorites
+      console.log("Adding to favorites " + id);
+      const options = {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'User-Agent': 'insomnia/8.5.1' },
+        body: JSON.stringify({
+          "user_id": token, // Retrieved from localstorage
+          "recipe_id": id
+        })
+      }
+
+      fetch('http://localhost:8000/api/favorites/', options)
+        .then(response => response.json())
+        .then(response => {
+          console.log(response);
+          this.likedRecipes[id] = true; // Toggle the state
+          // No need to save to localStorage, rely on server state
+          this.toastr.success('Spec-taco-lar, you have added this recipe to your favorites!', '', {})
+        })
+        .catch(err => console.error(err));
     }
-    fetch('http://localhost:8000/api/favorites', options)
-      .then(response => response.json())
-      .then(response => {
-        console.log(response);
-        this.likedRecipes[id] = !this.likedRecipes[id]; // toggle the state
-        localStorage.setItem('likedRecipes', JSON.stringify(this.likedRecipes)); // save the state
-      })
-      .catch(err => console.error(err));
   }
   /* toggleFavorite(id: any) {
     // fetch the token value from the localstorage and assign to a variable
@@ -170,7 +214,6 @@ export class HomeComponent {
   ngOnInit() {
     /* Renew getSuggestions when opening site to see the suggestions */
     this.getSuggestions();
-    const savedState = localStorage.getItem('likedRecipes');
-    this.likedRecipes = savedState ? JSON.parse(savedState) : {};
+    this.getFavorites();
   }
 }

@@ -14,7 +14,7 @@
         <button (click)="searchRecipe()" class="btn btn-primary m-1 w-100">Search</button>
         <div class="ownRecipes">
           <div class="row">
-            @for (recipe of recipe; track recipe.id) {
+            @for (recipe of myRecipes; track recipe.id) {
             <div class="row">
               <div class="col-sm-6 mb-3 mb-sm-0 w-100">
                 <div class="card">
@@ -43,7 +43,7 @@
             <h5 class="card-title">{{element.title}}</h5>
             <p class="card-text">{{element.ingredient}}</p>
             <p class="card-text">{{element.step}}</p>
-            <button (click)= "deleteRecipe(recipe.id)" class="btn btn-primary"> <i class="fa-solid fa-trash"></i></button>
+            <button (click)= "deleteRecipe(element.id)" class="btn btn-primary"> <i class="fa-solid fa-trash"></i></button>
           </div>
         </div>
       </div>

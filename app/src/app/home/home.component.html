@@ -1,8 +1,5 @@
 <head>
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
-  />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
 <div class="container">
   <div class="row">
@@ -14,12 +11,8 @@
         <h1>What do you want to eat?</h1>
         }
         <!-- Dietary options -->
-        <input
-          type="text"
-          class="form-control m-1 searchA"
-          [(ngModel)]="mySearch"
-          placeholder="I would like to eat..."
-        />
+        <input type="text" class="form-control m-1 searchA" [(ngModel)]="mySearch"
+          placeholder="I would like to eat..." />
         <div class="row-md-12 form-block">
           <div class="form-floating m-1 floatingSelect">
             <select class="form-select searchB" id="floatingSelect" [(ngModel)]="myDiet">
@@ -66,35 +59,19 @@
           }
           <div class="row">
             @for (element of this.search; track element.id) {
-            <div class="card" style="width: 18rem; margin: 10px">
-              <img
-                src="{{ element.image }}"
-                class="card-img-top"
-                alt="{{ element.title }}"
-              />
+            <div class="card" style="width: 18rem; margin: 10px" (click)="getRecipe(element.id)">
+              <img src="{{ element.image }}" class="card-img-top" alt="{{ element.title }}" />
               <div class="card-body">
                 <div>
                   <h5 class="card-title">{{ element.title }}</h5>
                 </div>
                 <div class="card-btn">
-                  <button
-                    (click)="getRecipe(element.id)"
-                    class="btn btn-primary m-1"
-                  >
+                  <button (click)="getRecipe(element.id)" class="btn btn-primary m-1">
                     Let's cook!
                   </button>
-                  <button
-                    (click)="addFavorite(element.id)"
-                    class="btn btn-primary m-1"
-                  >
-                    <i
-                      *ngIf="likedRecipes[element.id]"
-                      class="fa-solid fa-heart"
-                    ></i>
-                    <i
-                      *ngIf="!likedRecipes[element.id]"
-                      class="fa-regular fa-heart"
-                    ></i>
+                  <button *ngIf="isLoggedIn()" (click)="addOrRemoveFavorite(element.id)" class="btn btn-primary m-1">
+                    <i *ngIf="likedRecipes[element.id]" class="fa-solid fa-heart"></i>
+                    <i *ngIf="!likedRecipes[element.id]" class="fa-regular fa-heart"></i>
                   </button>
                 </div>
               </div>
@@ -105,24 +82,36 @@
       </div>
       <div class="recipeInformation" *ngIf="hideSearchInformation">
         <button (click)="goBack()" class="btn btn-primary">Back</button>
-        <button (click)="addFavorite(results.id)" class="btn btn-primary m-1">
+        <button (click)="addOrRemoveFavorite(results.id)" class="btn btn-primary m-1">
           <i class="fa-regular fa-heart"></i>
         </button>
         @if (results) {
-        <h3>{{ results.title }}</h3>
-        <img src="{{ results.image }}" alt="{{ results.title }}" />
-        <p>Diets: {{ results.diets }}</p>
-        <p>Ready in {{ results.readyInMinutes }} minutes.</p>
-        <p>Serves {{ results.servings }} people</p>
-        <div class="ingredients">
-          <b>Ingredients</b>
-          @for (ingredient of results.extendedIngredients; track ingredient.id)
-          {
-          <li>{{ ingredient.original }}</li>
-          }
+        <h1>{{ results.title }}</h1>
+        <div class="flex-container">
+          <div class="flex-item-left">
+            <b>Ingredients</b>
+            @for (ingredient of results.extendedIngredients; track ingredient.id)
+            {
+            <li>{{ ingredient.original }}</li>
+            }
+          </div>
         </div>
-        <b>Instructions</b>
-        <p [innerHTML]="results.instructions"></p>
+        <div class="flex-item-right">
+          <div class="img">
+            <img src="{{ results.image }}" alt="{{ results.title }}"
+              style="border-radius: 20px; width: 400px; height: auto;" />
+          </div>
+        </div>
+        <div class="details" style="display: flex;">
+          <b>Details</b>
+          <p> Diets: {{ results.diets }}</p>
+          <p>Ready in {{ results.readyInMinutes }} minutes.</p>
+          <p>Serves {{ results.servings }} people</p>
+        </div>
+        <div class="instructions">
+          <b>Instructions</b>
+          <p [innerHTML]="results.instructions"></p>
+        </div>
         } @else {
         <h3>Not able to display results, please contact support</h3>
         }
