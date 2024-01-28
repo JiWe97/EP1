@@ -5,7 +5,7 @@ import * as bcrypt from 'bcryptjs';
   providedIn: 'root'
 })
 export class UserService {
-  async register(userName:any, password:any, firstName:any, lastName:any, email:any) {
+  async register(userName: any, password: any, firstName: any, lastName: any, email: any) {
     const salt = bcrypt.genSaltSync(10);
     const hashedPassword = bcrypt.hashSync(password, salt);
     const user = {
@@ -24,23 +24,23 @@ export class UserService {
     });
     return result.json();
   }
-  
+
 
   // Returns all users
 
-	async getUsers() {
-      return  (await fetch('http://localhost:8000/api/users')).json()
+  async getUsers() {
+    return (await fetch('http://localhost:8000/api/users')).json()
+  }
+
+  // Checks user credentials and returns a valid token or null
+  async login(userName: string, password: string) {
+    let users = await this.getUsers();
+
+    let user = users.find((u: { username: string; password: string; }) => u.username === userName);
+
+    if (user && bcrypt.compareSync(password, user.password)) {
+      return user.id.toString();
     }
-  
-    // Checks user credentials and returns a valid token or null
-    async  login(userName:  string, password:  string) {
-      let users = await this.getUsers();
-      
-      let user = users.find((u: { username: string; password: string; }) => u.username === userName);
-      
-      if (user && bcrypt.compareSync(password, user.password)) {
-        return user.id.toString();
-      }
-      return null;
-    }
+    return null;
+  }
 }

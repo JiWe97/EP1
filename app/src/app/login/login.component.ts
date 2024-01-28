@@ -17,10 +17,10 @@ export class LoginComponent {
   showPassword: boolean = false;
 
 
-  constructor(private userService: UserService, private router: Router, private toastr: ToastrService) {}
+  constructor(private userService: UserService, private router: Router, private toastr: ToastrService) { }
 
   async onSubmit() {
-    
+
     const token = await this.userService.login(this.userName, this.password);
     if (token) {
       //Store token in local storage
@@ -43,28 +43,28 @@ export class LoginComponent {
   }
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
-  //   const passwordInput = document.getElementById('password');
-  //   const toggleIcon = document.querySelector('.toggle-password');
-  //   if (passwordInput.type === 'password') {
-  //     passwordInput.type = 'text';
-  //     toggleIcon.classList.remove('fa-eye');
-  //     toggleIcon.classList.add('fa-eye-slash');
-  //   } else {
-  //     passwordInput.type = 'password';
-  //     toggleIcon.classList.remove('fa-eye-slash');
-  //     toggleIcon.classList.add('fa-eye');
-  //   }
-  // }
-  
-// logout method
-	// logout() {
-  //   localStorage.removeItem('token');
-  //   localStorage.removeItem('userName');
-  //   console.log('Logged out successfully');
-  //   this.toastr.success('Donut pho-get about us, we will miss you', '', {
-  //     positionClass: 'toast-bottom-right'
-  //   });
-  //   }
+    //   const passwordInput = document.getElementById('password');
+    //   const toggleIcon = document.querySelector('.toggle-password');
+    //   if (passwordInput.type === 'password') {
+    //     passwordInput.type = 'text';
+    //     toggleIcon.classList.remove('fa-eye');
+    //     toggleIcon.classList.add('fa-eye-slash');
+    //   } else {
+    //     passwordInput.type = 'password';
+    //     toggleIcon.classList.remove('fa-eye-slash');
+    //     toggleIcon.classList.add('fa-eye');
+    //   }
+    // }
+
+    // logout method
+    // logout() {
+    //   localStorage.removeItem('token');
+    //   localStorage.removeItem('userName');
+    //   console.log('Logged out successfully');
+    //   this.toastr.success('Donut pho-get about us, we will miss you', '', {
+    //     positionClass: 'toast-bottom-right'
+    //   });
+    //   }
 
   }
 }
