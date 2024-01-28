@@ -1,12 +1,17 @@
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  />
 </head>
 <div class="container">
   <div class="row">
     <div class="col-md-12 input-field">
       <div class="search" *ngIf="hideRecipeInformation">
         @if (isLoggedIn()) {
-        <h1 *ngIf="isLoggedIn()">Hi {{ getUsername() }}, what do you want to eat?</h1>
+        <h1 *ngIf="isLoggedIn()">
+          Hi {{ getUsername() }}, what do you want to eat?
+        </h1>
         } @else {
         <h1>What do you want to eat?</h1>
         }
@@ -71,9 +76,19 @@
                   <button (click)="getRecipeInformation(element.id)" class="btn btn-primary m-1">
                     Let's cook!
                   </button>
-                  <button *ngIf="isLoggedIn()" (click)="addOrRemoveFavorite(element.id)" class="btn btn-primary m-1">
-                    <i *ngIf="likedRecipes[element.id]" class="fa-solid fa-heart"></i>
-                    <i *ngIf="!likedRecipes[element.id]" class="fa-regular fa-heart"></i>
+                  <button
+                    *ngIf="isLoggedIn()"
+                    (click)="addOrRemoveFavorite(element.id)"
+                    class="btn btn-primary m-1"
+                  >
+                    <i
+                      *ngIf="likedRecipes[element.id]"
+                      class="fa-solid fa-heart"
+                    ></i>
+                    <i
+                      *ngIf="!likedRecipes[element.id]"
+                      class="fa-regular fa-heart"
+                    ></i>
                   </button>
                 </div>
               </div>
@@ -93,8 +108,8 @@
         <div class="flex-container">
           <div class="flex-item-left">
             <b>Ingredients</b>
-            @for (ingredient of results.extendedIngredients; track ingredient.id)
-            {
+            @for (ingredient of results.extendedIngredients; track
+            ingredient.id) {
             <li>{{ ingredient.original }}</li>
             }
           </div>
