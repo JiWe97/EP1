@@ -16,32 +16,39 @@ import { ToastrService } from 'ngx-toastr';
 export class AppComponent {
   constructor(private toastr: ToastrService) { }
 
+  //method to check if user is logged in
   isLoggedIn() {
     const token = localStorage.getItem('token');
-    return token !== null; // Return true if a token is found
+    return token !== null; 
   }
 
+  //method to get username of logged in user
   getUsername() {
-    // Implement logic to get the username of the logged-in user
     try {
+      //attempt to get username from local storage
       const userName = localStorage.getItem('userName');
+      //username present? return it
       if (userName) {
         return userName;
       } else {
-        // Handle case where userName is not set
-        return 'Unknown User'; // Placeholder, update as needed
+        //username not present? return a placeholder
+        return 'Unknown User';
       }
-    } catch (e) {
+    } catch (e) { //error accessing local storage
       console.error('Error accessing local storage:', e);
-      return 'Unknown User'; // Placeholder, handle this as per your application's logic
+      return 'Unknown User'; 
     }
   }
+
+  //method to logout
   logout() {
+    //clear local storage
     localStorage.clear();
     console.log('Logged out successfully');
     this.toastr.success('We will tira-miss you', '', {
       positionClass: 'toast-bottom-right'
     });
+    //reload page
     window.location.reload();
   }
 }

@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+  //declarations for login
   userName!: string;
   password!: string;
   showPassword: boolean = false;
@@ -19,9 +20,12 @@ export class LoginComponent {
 
   constructor(private userService: UserService, private router: Router, private toastr: ToastrService) { }
 
+  //method to handle login submission
   async onSubmit() {
-
+    //call userService to attempt login
     const token = await this.userService.login(this.userName, this.password);
+
+    //check if login was successful
     if (token) {
       //Store token in local storage
       localStorage.setItem('userName', this.userName.toString());
@@ -33,38 +37,18 @@ export class LoginComponent {
         positionClass: 'toast-bottom-right'
       });
     } else {
-      //toastr in the bottom right corner
+      //toastr warning
       this.toastr.warning('Holy guacemoly, you have entered an invalid username or password!', '', {
         positionClass: 'toast-bottom-right'
       });
     }
 
-    //console.log('Login successful for user:', this.userName);
   }
+
+  // toggle password visibility
   togglePasswordVisibility(): void {
     this.showPassword = !this.showPassword;
-    //   const passwordInput = document.getElementById('password');
-    //   const toggleIcon = document.querySelector('.toggle-password');
-    //   if (passwordInput.type === 'password') {
-    //     passwordInput.type = 'text';
-    //     toggleIcon.classList.remove('fa-eye');
-    //     toggleIcon.classList.add('fa-eye-slash');
-    //   } else {
-    //     passwordInput.type = 'password';
-    //     toggleIcon.classList.remove('fa-eye-slash');
-    //     toggleIcon.classList.add('fa-eye');
-    //   }
-    // }
-
-    // logout method
-    // logout() {
-    //   localStorage.removeItem('token');
-    //   localStorage.removeItem('userName');
-    //   console.log('Logged out successfully');
-    //   this.toastr.success('Donut pho-get about us, we will miss you', '', {
-    //     positionClass: 'toast-bottom-right'
-    //   });
-    //   }
+ 
 
   }
 }
